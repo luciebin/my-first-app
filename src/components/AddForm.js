@@ -13,7 +13,8 @@ export const AddForm = () => {
     "Jiné",
   ];
 
-  const [customOption, setCustomOption] = React.useState(""); //možnost vlastní aktivity
+  //možnost vlastní aktivity
+  const [customOption, setCustomOption] = React.useState("");
   const [formData, setFormData] = React.useState({
     name: "",
     age: "",
@@ -24,10 +25,29 @@ export const AddForm = () => {
     activity: "",
   });
 
-  const handleSubmit = (e) => {
-    e.preventDefault(); //zamězí znovu načtení stránky
+  const [agreement, setAgreement] = React.useState(false); //ošetří zaškrtnutí checkboxu
 
-    if (!formData.name.trim()) return; //zamezí přidání prázdného textu
+  const handleSubmit = (e) => {
+    e.preventDefault(); //zamezí znovu načtení stránky
+
+    //zamezí přidání prázdného textu a upozornění, že nejsou vyplněny všechna pole
+    if (
+      !formData.name.trim() ||
+      !formData.age.trim() ||
+      !formData.email.trim() ||
+      !formData.date.trim() ||
+      !formData.password.trim() ||
+      !formData.message.trim() ||
+      !formData.activity.trim()
+    ) {
+      alert("Vyplň prosím všechna povinná pole.");
+      return;
+    }
+
+    if (!agreement) {
+      alert("Musíš souhlasit se zpracováním osobních údajů.");
+      return;
+    }
 
     const newForm = {
       //uloží celý formulář do záznamu
@@ -97,6 +117,7 @@ export const AddForm = () => {
             type="date"
             id="date"
             value={formData.date}
+            min={new Date().toISOString().split("T")[0]} // dnešní datum
             onChange={(e) => setFormData({ ...formData, date: e.target.value })}
           />
         </div>
@@ -163,7 +184,12 @@ export const AddForm = () => {
         )}
 
         <div className="checkbox">
-          <input type="checkbox" name="agreement" required />
+          <input
+            type="checkbox"
+            name="agreement"
+            checked={agreement}
+            onChange={(e) => setAgreement(e.target.checked)}
+          />
           <label>Souhlasím se zpracováním osobních údajů</label>
         </div>
 
