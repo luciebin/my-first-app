@@ -1,0 +1,67 @@
+@import "./form.css";
+@import "./mixins.css";
+@import "./reset.css";
+
+body,
+html {
+  margin: 0 auto;
+  font-family: "Indie Flower", "serif";
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+header {
+  text-align: center;
+}
+
+h1 {
+  font-size: 3.5rem;
+}
+
+p {
+  font-size: 1.5rem;
+  font-family: "Roboto Condensed";
+}
+
+/* :root {
+  --color-green: #113219;
+  --color-brown: #261a0d;
+  --color-light: #dee9be;
+  --color-light-green: #98dda1;
+  --color-blue: #6ac5cd;
+  --color-pink: #d98ca6;
+  --color-yellow: #c6b453;
+  --color-coral: #a22e57;
+  --button-radius: 35px;
+  --font-raleway: "Raleway", sans-serif;
+  --font-open-sans: "Open Sans", sans-serif;
+} */
+
+/* body {
+  font-family: var(--font-open-sans);
+}
+
+a {
+  text-decoration: none;
+}
+
+h2 {
+  font-family: var(--font-raleway);
+  font-size: 2.25rem;
+  font-weight: normal;
+}
+
+.container {
+  width: 1352px;
+  margin: 0 auto;
+
+  @include notebook {
+    width: 100%;
+  }
+} */

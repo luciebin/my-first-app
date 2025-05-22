@@ -1,0 +1,68 @@
+.addForm {
+  max-width: 400px;
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.form-row label {
+  width: 100px;
+}
+
+.form-row input,
+textarea {
+  width: 200px;
+}
+
+.add-button,
+.save-button {
+  border: none;
+  border-radius: 5px;
+}
+
+.form-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.add-button {
+  padding: 10px 25px;
+}
+
+.add-button:hover {
+  transform: scale(1.2);
+}
+
+.form-choose {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: 0 auto;
+}
+
+.save-button {
+  padding: 0 10px;
+}
+
+input[type="checkbox"] {
+  margin-top: 10px;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 50px;
+  background: #eee;
+  outline: none;
+  position: relative;
+}
