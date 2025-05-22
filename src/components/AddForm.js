@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router";
+import "../css/form.css";
 
 export const AddForm = () => {
   const navigate = useNavigate();
@@ -11,8 +12,8 @@ export const AddForm = () => {
     "Kurzy",
     "Jiné",
   ];
-  const [form, setForm] = React.useState([]); //pole pro všechny odeslané záznamy.
-  const [customOption, setCustomOption] = React.useState("Other"); //možnost vlastní aktivity
+
+  const [customOption, setCustomOption] = React.useState(""); //možnost vlastní aktivity
   const [formData, setFormData] = React.useState({
     name: "",
     age: "",
@@ -41,14 +42,8 @@ export const AddForm = () => {
 
     // Uložím zpět do localStorage
     localStorage.setItem("formList", JSON.stringify(updated));
-    navigate("/lists");
 
-    setForm((prev) => {
-      const updated = [...prev, newForm]; //přidá nový záznam do pole form
-      navigate("/lists", { state: form }); //přenáším data
-      return updated;
-    });
-
+    //vyčistí input po odeslání
     setFormData({
       name: "",
       age: "",
@@ -57,7 +52,9 @@ export const AddForm = () => {
       password: "",
       message: "",
       activity: "",
-    }); //vyčistí input po odeslání
+    });
+
+    navigate("/lists");
   };
 
   return (
@@ -139,7 +136,9 @@ export const AddForm = () => {
             }
           >
             {defaultItems.map((item) => (
-              <option key={item}>{item}</option>
+              <option key={item} value={item}>
+                {item}
+              </option>
             ))}
           </select>
         </div>
@@ -155,7 +154,7 @@ export const AddForm = () => {
               className="save-button"
               type="button"
               onClick={() =>
-                setFormData({ ...formData, acitivty: customOption })
+                setFormData({ ...formData, activity: customOption })
               }
             >
               Uložit
@@ -163,20 +162,17 @@ export const AddForm = () => {
           </div>
         )}
 
-        <label>
-          <input type="checkbox" name="agreement" value="1" />
-        </label>
+        <div className="checkbox">
+          <input type="checkbox" name="agreement" required />
+          <label>Souhlasím se zpracováním osobních údajů</label>
+        </div>
+
         <div className="form-button">
           <button className="add-button" type="submit">
             Odeslat
           </button>
         </div>
       </form>
-
-      {/* <!-- <form class="search-form">
-      <label for="search">Vyhledej</label>
-      <input type="text" id="search" />
-    </form> --> */}
     </div>
   );
 };

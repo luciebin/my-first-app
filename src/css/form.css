@@ -55,6 +55,12 @@ textarea {
   padding: 0 10px;
 }
 
+.checkbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 input[type="checkbox"] {
   margin-top: 10px;
   width: 20px;
