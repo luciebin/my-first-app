@@ -9,30 +9,9 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route
-          path="/"
-          element={
-            <div>
-              <nav
-                style={{
-                  display: "flex",
-                  color: "black",
-                  gap: "8px",
-                  justifyContent: "center",
-                }}
-              >
-                <NavLink to={"/"}>Domů</NavLink>
-                <NavLink to={"/addForm"}>Přidej inzerát</NavLink>
-                <NavLink to={"/lists"}>Inzeráty</NavLink>
-              </nav>
-              <Outlet></Outlet>
-            </div>
-          }
-        >
-          <Route index element={<Home />} />
-          <Route path="addform" element={<AddForm />} />
-          <Route path="Lists" element={<Lists />} />
-        </Route>
+        <Route path="/" element={<Home />} />
+        <Route path="addform" element={<AddForm />} />
+        <Route path="lists" element={<Lists />} />
       </Routes>
     </BrowserRouter>
   );

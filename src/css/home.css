@@ -1,0 +1,13 @@
+.home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: auto;
+  width: max-content;
+}
+
+h1 {
+  font-size: 4rem;
+  margin: 20px;
+}

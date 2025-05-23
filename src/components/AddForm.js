@@ -198,6 +198,16 @@ export const AddForm = () => {
             Odeslat
           </button>
         </div>
+
+        <div className="back-button">
+          <button
+            className="go-back-button"
+            type="button"
+            onClick={() => navigate("/")}
+          >
+            Zpět
+          </button>
+        </div>
       </form>
     </div>
   );

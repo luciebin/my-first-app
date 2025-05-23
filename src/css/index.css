@@ -8,24 +8,8 @@ html {
 }
 
 .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-}
-
-header {
-  text-align: center;
-}
-
-h1 {
-  font-size: 3.5rem;
-}
-
-p {
-  font-size: 1.5rem;
-  font-family: "Roboto Condensed";
+  width: 1352px;
+  height: 100vh;
 }
 
 /* :root {
@@ -40,23 +24,14 @@ p {
   --button-radius: 35px;
   --font-raleway: "Raleway", sans-serif;
   --font-open-sans: "Open Sans", sans-serif;
+  --blue: #2D9CDB
+  --darkblue: #1B7DB3
+  --lightgrey:#f7f9fc
+  --darkgrey: #333333
+  --white:#ffffff
 } */
 
-/* body {
-  font-family: var(--font-open-sans);
-}
-
-a {
-  text-decoration: none;
-}
-
-h2 {
-  font-family: var(--font-raleway);
-  font-size: 2.25rem;
-  font-weight: normal;
-}
-
-.container {
+/* .container {
   width: 1352px;
   margin: 0 auto;
 

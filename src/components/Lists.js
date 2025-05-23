@@ -11,7 +11,6 @@ export const Lists = () => {
 
   return (
     <div>
-      {" "}
       <ul>
         {formList.map((info) => (
           <li key={info.id}>
@@ -23,6 +22,11 @@ export const Lists = () => {
           </li>
         ))}
       </ul>
+
+      {/* <!-- <form class="search-form">
+    <label for="search">Vyhledej</label>
+    <input type="text" id="search" />
+  </form> --> */}
     </div>
   );
 };
