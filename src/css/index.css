@@ -4,18 +4,22 @@
 body,
 html {
   margin: 0 auto;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
   font-family: "Indie Flower", "serif";
 }
 
-.container {
-  width: 1352px;
-  height: 100vh;
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
 }
 
-/* :root {
+:root {
   --color-green: #113219;
   --color-brown: #261a0d;
-  --color-light: #dee9be;
+  --color-capuccino: #b69f7e;
   --color-light-green: #98dda1;
   --color-blue: #6ac5cd;
   --color-pink: #d98ca6;
@@ -23,13 +27,14 @@ html {
   --color-coral: #a22e57;
   --button-radius: 35px;
   --font-raleway: "Raleway", sans-serif;
-  --font-open-sans: "Open Sans", sans-serif;
-  --blue: #2D9CDB
-  --darkblue: #1B7DB3
-  --lightgrey:#f7f9fc
-  --darkgrey: #333333
-  --white:#ffffff
-} */
+  --font-poppins: "Poppins", sans-serif;
+  --blue: #2d9cdb;
+  --darkblue: #1b7db3;
+  --lightgrey: #b5bac1;
+  --darkgrey: #333333;
+  --white: #ffffff;
+  --font-Indie: "Indie Flower", sans-serif;
+}
 
 /* .container {
   width: 1352px;

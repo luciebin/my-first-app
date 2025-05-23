@@ -7,22 +7,41 @@ export const Home = () => {
 
   return (
     <div className="home">
-      <h1>Najdi si svého buddyho!</h1>
-      <h2>Spojujeme lidi, co se chtějí opravdu potkat.</h2>
-      <h3>
-        LetsMeetOffline je místo, kde si lidé dávají výzvy, plány a inzeráty na
-        reálné akce – koncerty, sport, procházky, cokoliv. Napiš, co chceš
-        podniknout. Najdi parťáka. A hlavně – potkej se. Naživo.
-      </h3>
-      <p>
-        Ahoj, vítám tě na místě, kde můžeš potkat parťáka na jakoukoliv
-        aktivitu. Chceš začít tančit? Lézt po skalách? Chybí ti +1 na svatbu
-        nebo se chceš jít jen projít s další maminkou? Dej vědět, co plánuješ.
-        Přidej se. Potkej se.
-      </p>
-      <div className="home-buttons">
-        <button onClick={() => navigate("/addform")}>Přidat inzerát</button>
-        <button onClick={() => navigate("/lists")}>Zobrazit inzeráty</button>
+      {/*Video background*/}
+      <video
+        className="home-video"
+        src="/videos/friends-loop.mp4"
+        autoPlay
+        loop
+        muted
+        playsInline
+      />
+      {/*Obsah nad videem*/}
+      <div className="home-content">
+        <h1>
+          <span style={{ color: "#222" }}>Najdi si svého</span>{" "}
+          <span style={{ color: "var(--color-green)" }}>buddyho!</span>
+        </h1>
+        <p>
+          LetsMeetOffline je místo, kde můžeš potkat parťáka na jakoukoliv
+          aktivitu. Chceš začít tančit? Lézt po skalách? Chybí ti +1 na svatbu
+          nebo se chceš jít jen projít s další maminkou? Dej vědět, co plánuješ.
+          <br />
+          Přidej se. Potkej se. <br />
+          Naživo.
+        </p>
+        <h3>Spojujeme lidi, co se chtějí opravdu potkat.</h3>
+        <div className="home-buttons">
+          <button
+            className="home-add-button"
+            onClick={() => navigate("/addform")}
+          >
+            Přidat inzerát
+          </button>
+          <button className="show-button" onClick={() => navigate("/lists")}>
+            Zobrazit inzeráty
+          </button>
+        </div>
       </div>
     </div>
   );
