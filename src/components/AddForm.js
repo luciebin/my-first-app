@@ -18,8 +18,8 @@ export const AddForm = () => {
   const [formData, setFormData] = React.useState({
     name: "",
     age: "",
-    email: "",
     date: "",
+    email: "",
     password: "",
     message: "",
     activity: "",
@@ -34,8 +34,8 @@ export const AddForm = () => {
     if (
       !formData.name.trim() ||
       !formData.age.trim() ||
-      !formData.email.trim() ||
       !formData.date.trim() ||
+      !formData.email.trim() ||
       !formData.password.trim() ||
       !formData.message.trim() ||
       !formData.activity.trim()
@@ -43,6 +43,16 @@ export const AddForm = () => {
       alert("Vyplň prosím všechna povinná pole.");
       return;
     }
+
+    if (formData.activity === "Jiné" && !customOption.trim()) {
+      alert("Zadej vlastní aktivitu.");
+      return;
+    }
+
+    const finalData = {
+      ...formData,
+      activity: formData.activity === "Jiné" ? customOption : formData.activity,
+    };
 
     if (!agreement) {
       alert("Musíš souhlasit se zpracováním osobních údajů.");
@@ -52,7 +62,7 @@ export const AddForm = () => {
     const newForm = {
       //uloží celý formulář do záznamu
       id: Date.now(),
-      data: formData,
+      data: finalData,
     };
 
     // Získám uložené formuláře (pokud nějaké jsou)
@@ -67,13 +77,14 @@ export const AddForm = () => {
     setFormData({
       name: "",
       age: "",
-      email: "",
       date: "",
+      email: "",
       password: "",
       message: "",
       activity: "",
     });
 
+    setCustomOption("");
     navigate("/lists");
   };
 
@@ -100,6 +111,17 @@ export const AddForm = () => {
         </div>
 
         <div className="form-row">
+          <label htmlFor="date">Kdy</label>
+          <input
+            type="date"
+            id="date"
+            value={formData.date}
+            min={new Date().toISOString().split("T")[0]} // dnešní datum
+            onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+          />
+        </div>
+
+        <div className="form-row">
           <label htmlFor="email">Email</label>
           <input
             id="email"
@@ -108,17 +130,6 @@ export const AddForm = () => {
             onChange={(e) =>
               setFormData({ ...formData, email: e.target.value })
             }
-          />
-        </div>
-
-        <div className="form-row">
-          <label htmlFor="date">Kdy</label>
-          <input
-            type="date"
-            id="date"
-            value={formData.date}
-            min={new Date().toISOString().split("T")[0]} // dnešní datum
-            onChange={(e) => setFormData({ ...formData, date: e.target.value })}
           />
         </div>
 

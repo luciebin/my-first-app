@@ -10,7 +10,7 @@ export const Home = () => {
       {/*Video background*/}
       <video
         className="home-video"
-        src="/videos/friends-loop.mp4"
+        src="/videos/women_run.mp4"
         autoPlay
         loop
         muted
@@ -19,8 +19,8 @@ export const Home = () => {
       {/*Obsah nad videem*/}
       <div className="home-content">
         <h1>
-          <span style={{ color: "#222" }}>Najdi si svého</span>{" "}
-          <span style={{ color: "var(--color-green)" }}>buddyho!</span>
+          <span style={{ color: "#222" }}>Najdi svého</span>{" "}
+          <span style={{ color: "var(--color-primary)" }}>buddyho!</span>
         </h1>
         <p>
           LetsMeetOffline je místo, kde můžeš potkat parťáka na jakoukoliv
