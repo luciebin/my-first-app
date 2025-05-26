@@ -1,6 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router";
 import "../css/addform.css";
+import { db } from "../firebase";
+import { collection, addDoc } from "firebase/firestore";
 
 export const AddForm = () => {
   const navigate = useNavigate();
@@ -27,7 +29,7 @@ export const AddForm = () => {
 
   const [agreement, setAgreement] = React.useState(false); //ošetří zaškrtnutí checkboxu
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault(); //zamezí znovu načtení stránky
 
     //zamezí přidání prázdného textu a upozornění, že nejsou vyplněny všechna pole
@@ -54,7 +56,7 @@ export const AddForm = () => {
       return;
     }
 
-    if (!formData.password.length > 4) {
+    if (!formData.password.length < 4) {
       alert("Heslo musí mít minimálně 4 znaky");
       return;
     }
@@ -64,36 +66,34 @@ export const AddForm = () => {
       activity: formData.activity === "Jiné" ? customOption : formData.activity,
     };
 
-    const newForm = {
-      //uloží celý formulář do záznamu
-      id: Date.now(),
-      data: finalData,
-    };
+    // uložení do Firestore
+    try {
+      await addDoc(collection(db, "formList"), {
+        data: finalData,
+        createdAt: new Date(),
+      });
 
-    // Získám uložené formuláře (pokud nějaké jsou)
-    const stored = JSON.parse(localStorage.getItem("formList")) || [];
-    // Přidám nový záznam
-    const updated = [...stored, newForm];
+      //vyčistí input po odeslání
+      setFormData({
+        name: "",
+        age: "",
+        date: "",
+        email: "",
+        password: "",
+        message: "",
+        activity: "",
+      });
 
-    // Uložím zpět do localStorage
-    localStorage.setItem("formList", JSON.stringify(updated));
+      if (formData.activity === "Jiné") {
+        setCustomOption("");
+      }
+      setAgreement(false);
 
-    //vyčistí input po odeslání
-    setFormData({
-      name: "",
-      age: "",
-      date: "",
-      email: "",
-      password: "",
-      message: "",
-      activity: "",
-    });
-
-    if (formData.activity === "Jiné") {
-      setCustomOption("");
+      navigate("/lists");
+    } catch (error) {
+      console.error("Chyba při ukládání do Firestore:", error);
+      alert("Nepodařilo se uložit. Zkus to znovu.");
     }
-
-    navigate("/lists");
   };
 
   return (

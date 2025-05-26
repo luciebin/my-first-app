@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import { db } from "../firebase";
+import { collection, getDocs, query, orderBy } from "firebase/firestore";
+
 import "../css/lists.css";
 
 export const Lists = () => {
@@ -9,8 +12,24 @@ export const Lists = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
-    const saved = JSON.parse(localStorage.getItem("formList")) || [];
-    setFormList(saved);
+    const fetchData = async () => {
+      try {
+        const q = query(
+          collection(db, "formList"),
+          orderBy("createdAt", "desc")
+        );
+        const snapshot = await getDocs(q);
+        const data = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setFormList(data);
+      } catch (error) {
+        console.error("Chyba při načítání z Firestore:", error);
+      }
+    };
+
+    fetchData();
   }, []);
 
   return (
@@ -53,28 +72,21 @@ export const Lists = () => {
       <ul className="cards">
         {formList
           .filter((item) =>
-            selectedFilter ? item.data.activity === selectedFilter : true
+            selectedFilter ? item.activity === selectedFilter : true
           )
           .filter(
             (item) =>
-              item.data.activity
-                .toLowerCase()
-                .includes(searchQuery.toLowerCase()) ||
-              item.data.message
-                .toLowerCase()
-                .includes(searchQuery.toLowerCase())
+              item.activity.toLowerCase().includes(searchQuery.toLowerCase()) ||
+              item.message.toLowerCase().includes(searchQuery.toLowerCase())
           )
           .map((info) => (
-            <li
-              key={info.id}
-              className={`card ${info.data.activity.toLowerCase()}`}
-            >
-              <p>{info.data.date}</p>
+            <li key={info.id} className={`card ${info.activity.toLowerCase()}`}>
+              <p>{info.date}</p>
               <p>
-                {info.data.name}, {info.data.age}
+                {info.name}, {info.age}
               </p>
-              <p>{info.data.activity}</p>
-              <p>{info.data.message}</p>
+              <p>{info.activity}</p>
+              <p>{info.message}</p>
             </li>
           ))}
       </ul>
