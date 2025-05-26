@@ -7,30 +7,30 @@ export const Home = () => {
 
   return (
     <div className="home">
-      {/*Video background*/}
       <video
         className="home-video"
-        src="/videos/women_run.mp4"
+        src="/videos/friends-loop.mp4"
         autoPlay
         loop
         muted
         playsInline
       />
-      {/*Obsah nad videem*/}
+
       <div className="home-content">
         <h1>
           <span style={{ color: "#222" }}>Najdi svého</span>{" "}
-          <span style={{ color: "var(--color-primary)" }}>buddyho!</span>
+          <span style={{ color: "var(--color-green)" }}>buddyho!</span>
         </h1>
         <p>
-          LetsMeetOffline je místo, kde můžeš potkat parťáka na jakoukoliv
-          aktivitu. Chceš začít tančit? Lézt po skalách? Chybí ti +1 na svatbu
-          nebo se chceš jít jen projít s další maminkou? Dej vědět, co plánuješ.
+          LetsMeetOffline je místo, kde můžeš najít parťáka na jakoukoliv
+          aktivitu. Chceš začít tančit? Vyrazit na hory? Jít na koncert nebo se
+          chceš jen projít s další maminkou? Dej vědět, co plánuješ – nebo se
+          přidej k někomu, kdo už něco chystá.
           <br />
           Přidej se. Potkej se. <br />
           Naživo.
         </p>
-        <h3>Spojujeme lidi, co se chtějí opravdu potkat.</h3>
+        <p>Spojujeme lidi, kteří se chtějí opravdu potkat.</p>
         <div className="home-buttons">
           <button
             className="home-add-button"
@@ -39,7 +39,7 @@ export const Home = () => {
             Přidat inzerát
           </button>
           <button className="show-button" onClick={() => navigate("/lists")}>
-            Zobrazit inzeráty
+            Přidat se k někomu
           </button>
         </div>
       </div>

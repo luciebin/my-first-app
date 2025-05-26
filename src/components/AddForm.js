@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router";
-import "../css/form.css";
+import "../css/addform.css";
 
 export const AddForm = () => {
   const navigate = useNavigate();
@@ -49,15 +49,20 @@ export const AddForm = () => {
       return;
     }
 
-    const finalData = {
-      ...formData,
-      activity: formData.activity === "Jiné" ? customOption : formData.activity,
-    };
-
     if (!agreement) {
       alert("Musíš souhlasit se zpracováním osobních údajů.");
       return;
     }
+
+    if (!formData.password.length > 4) {
+      alert("Heslo musí mít minimálně 4 znaky");
+      return;
+    }
+
+    const finalData = {
+      ...formData,
+      activity: formData.activity === "Jiné" ? customOption : formData.activity,
+    };
 
     const newForm = {
       //uloží celý formulář do záznamu
@@ -84,12 +89,25 @@ export const AddForm = () => {
       activity: "",
     });
 
-    setCustomOption("");
+    if (formData.activity === "Jiné") {
+      setCustomOption("");
+    }
+
     navigate("/lists");
   };
 
   return (
     <div className="addForm">
+      <div className="back-button">
+        <button
+          className="go-back-button"
+          type="button"
+          onClick={() => navigate("/")}
+        >
+          Zpět
+        </button>
+      </div>
+
       <form className="fill-form" onSubmit={handleSubmit}>
         <h2>Můj inzerát</h2>
         <div className="form-row">
@@ -157,12 +175,11 @@ export const AddForm = () => {
           />
         </div>
 
-        <div className="form-row">
+        <div className="form-row-category">
           <label htmlFor="activity">Kategorie</label>
           <select
             id="activity"
             value={formData.activity}
-            placeholder="Napiš něco o sobě a co chceš dělat"
             onChange={(e) =>
               setFormData({ ...formData, activity: e.target.value })
             }
@@ -182,15 +199,6 @@ export const AddForm = () => {
               onChange={(e) => setCustomOption(e.target.value)}
               placeholder="Zadej vlastní aktivitu"
             />
-            <button
-              className="save-button"
-              type="button"
-              onClick={() =>
-                setFormData({ ...formData, activity: customOption })
-              }
-            >
-              Uložit
-            </button>
           </div>
         )}
 
@@ -207,16 +215,6 @@ export const AddForm = () => {
         <div className="form-button">
           <button className="add-button" type="submit">
             Odeslat
-          </button>
-        </div>
-
-        <div className="back-button">
-          <button
-            className="go-back-button"
-            type="button"
-            onClick={() => navigate("/")}
-          >
-            Zpět
           </button>
         </div>
       </form>

@@ -1,5 +1,5 @@
 .lists {
-  background-color: rgb(249, 238, 224);
+  background-color: var(--color-bg-list);
   height: 100vh;
 }
 
@@ -8,20 +8,29 @@
   padding: 1rem;
   align-items: center;
   justify-content: space-between;
-  height: 100px;
+  height: 90px;
   width: 100%;
-  background-color: rgb(92, 57, 41);
-  box-shadow: inset 5px 5px 30px 5px rgb(0 0 0 / 0.3);
-  /* filter: blur(3px); filtr, rozostření */
+  background-color: var(--color-bg-navbar);
+  box-shadow: inset 5px 5px 30px rgb(0 0 0 / 0.2);
+  font-family: var(--font-buttons);
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
-.lits-go-back-button {
-  border-radius: 5px;
+.lists-go-back-button,
+.nav-bar select,
+.search-form input {
+  border-radius: var(--border-radius);
   border: none;
   height: 40px;
-  width: 80px;
+  width: 130px;
+  background-color: var(--color-buttons);
 }
 
+.lists-go-back-button:hover {
+  background-color: var(--color-btn-hover);
+}
 .filters {
   display: flex;
   align-items: center;
@@ -29,69 +38,36 @@
 }
 
 .nav-bar select {
-  border-radius: 5px;
-  border: none;
-  height: 40px;
-  width: 150px;
+  width: 130px;
 }
 
 .search-form input {
-  border-radius: 5px;
-  border: none;
-  height: 40px;
   width: 230px;
   padding-left: 5px;
 }
 
 .cards {
-  column-count: 3; /* počet sloupců – můžeš upravit podle šířky */
+  column-count: 3;
   column-gap: 1rem;
   padding: 1rem;
+  list-style: none;
 }
 
 .card {
-  display: inline-block; /* důležité pro správné chování v columns */
+  display: inline-block;
   width: 100%;
-  margin-bottom: 1rem;
-  break-inside: avoid; /* zabrání rozdělení kartičky mezi sloupce */
-  border-radius: 8px;
+  margin: 0 0 1rem;
+  break-inside: avoid; /* zabrání rozdělení karty */
+  border-radius: var(--border-radius);
   padding: 1rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  animation: fadeInUp 0.6s ease both;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: var(--color-buttons);
+  transition: transform 0.2s ease;
   cursor: pointer;
+  font-family: var(--font-secondary);
 }
 
-@keyframes fadeInUp {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.card p {
-  font-family: "Indie Flower", "serif";
-}
-
-.card.sport {
-  background-color: var(--color-light-green);
-}
-
-.card.kurzy {
-  background-color: var(--color-pink);
-}
-
-.card.umění {
-  background-color: var(--color-blue);
-}
-
-.card.hudebníakce {
-  background-color: var(--color-yellow);
-}
-
-.card.jiné {
-  background-color: var(--color-coral);
+.card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
 }
