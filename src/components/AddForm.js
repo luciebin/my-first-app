@@ -31,7 +31,7 @@ export const AddForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault(); //zamezí znovu načtení stránky
-
+    console.log("handleSubmit spuštěn");
     //zamezí přidání prázdného textu a upozornění, že nejsou vyplněny všechna pole
     if (
       !formData.name.trim() ||
@@ -56,15 +56,23 @@ export const AddForm = () => {
       return;
     }
 
-    if (!formData.password.length < 4) {
-      alert("Heslo musí mít minimálně 4 znaky");
+    const finalData = {
+      name: formData.name.trim(),
+      age: formData.age.trim(),
+      date: formData.date.trim(),
+      email: formData.email.trim(),
+      password: formData.password.trim(),
+      message: formData.message.trim(),
+      activity:
+        formData.activity === "Jiné"
+          ? customOption.trim()
+          : formData.activity.trim(),
+    };
+
+    if (isNaN(parseInt(formData.age))) {
+      alert("Věk musí být číslo.");
       return;
     }
-
-    const finalData = {
-      ...formData,
-      activity: formData.activity === "Jiné" ? customOption : formData.activity,
-    };
 
     // uložení do Firestore
     try {
@@ -156,6 +164,7 @@ export const AddForm = () => {
           <input
             type="password"
             id="password"
+            minLength={4} //zkontrolovat jestli funguje heslo
             value={formData.password}
             onChange={(e) =>
               setFormData({ ...formData, password: e.target.value })
