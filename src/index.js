@@ -2,8 +2,8 @@ import { createRoot } from "react-dom/client";
 import "./css/index.css";
 import { BrowserRouter, Route, Routes } from "react-router";
 import { AddForm } from "./components/AddForm";
-import { Lists } from "./components/Lists";
 import { Home } from "./components/Home";
+import { ListOfAd } from "./components/ListOfAd";
 
 const App = () => {
   return (
@@ -11,7 +11,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="addform" element={<AddForm />} />
-        <Route path="lists" element={<Lists />} />
+        <Route path="lists" element={<ListOfAd />} />
       </Routes>
     </BrowserRouter>
   );

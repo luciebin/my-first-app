@@ -71,3 +71,19 @@
   transform: scale(1.02);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
 }
+
+.notice {
+  color: green;
+  font-weight: bold;
+  margin: 1rem 0;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
