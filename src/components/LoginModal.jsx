@@ -12,7 +12,7 @@ export const LoginModal = ({ setShowLoginModal }) => {
     };
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  }, [setShowLoginModal]);
 
   return (
     <div className="modal">
