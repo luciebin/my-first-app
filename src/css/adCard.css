@@ -1,0 +1,34 @@
+.card-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.card-btn {
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  background-color: var(--color-bg-list);
+  font-family: var(--font-buttons);
+  padding: 6px 15px;
+  font-size: 0.9rem;
+  margin-top: 10px;
+}
+
+.card-edit {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.card-edit input,
+.card-edit textarea {
+  border: 1px solid #e0dfdf;
+  border-radius: 3px;
+  padding: 1px;
+}
+
+.card-edit textarea {
+  width: fit-content;
+}

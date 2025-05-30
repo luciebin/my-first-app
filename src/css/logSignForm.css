@@ -1,0 +1,38 @@
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  text-align: center;
+}
+
+.login-email,
+.login-pass {
+  width: 100%;
+}
+
+.login-email label,
+.login-pass label {
+  margin-right: 20px;
+}
+
+.login-pass input,
+.login-email input {
+  width: 200px;
+}
+
+.login-button-modal {
+  border: none;
+  border-radius: 10px;
+  background-color: var(--color-buttons);
+  height: 40px;
+  width: 150px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  box-shadow: -2px -2px 10px #a3a0a0, 2px 2px 10px #a3a0a0;
+}
+
+.login-button-modal:hover {
+  background-color: var(--color-btn-hover);
+}

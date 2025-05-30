@@ -9,7 +9,7 @@ export const Home = () => {
       <div className="home">
         <video
           className="home-video"
-          src="/videos/volleyball.mp4"
+          src="/videos/friends-loop.mp4"
           autoPlay
           loop
           muted

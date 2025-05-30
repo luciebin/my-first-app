@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 
+import "../css/logSignForm.css";
+
 export const SignUpForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -32,8 +34,8 @@ export const SignUpForm = () => {
   };
 
   return (
-    <div className="signup-form">
-      <div className="signup-email">
+    <div className="login-form">
+      <div className="login-email">
         <label htmlFor="email">Email</label>
         <input
           id="email"
@@ -42,7 +44,7 @@ export const SignUpForm = () => {
         ></input>
       </div>
 
-      <div className="signup-password">
+      <div className="login-pass">
         <label htmlFor="password">Heslo</label>
         <input
           id="password"
@@ -54,7 +56,11 @@ export const SignUpForm = () => {
 
       {message && <p className="message">{message}</p>}
 
-      <button onClick={handleSignUp} disabled={loading}>
+      <button
+        className="login-button-modal"
+        onClick={handleSignUp}
+        disabled={loading}
+      >
         {loading ? "Probíhá registrace..." : "Zaregistrovat se"}
       </button>
     </div>

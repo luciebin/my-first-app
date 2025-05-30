@@ -1,11 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
-import { signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { useNavigate } from "react-router";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 
-export const LoginForm = () => {
+import "../css/logSignForm.css";
+
+export const LoginForm = ({ setShowLoginModal }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  const navigate = useNavigate();
   const emailRef = useRef(); // odkazuje na input a umožní mu např. focus.
 
   useEffect(() => {
@@ -21,8 +25,10 @@ export const LoginForm = () => {
       return;
     }
     try {
-      await signInWithEmailAndPassword(auth, email, password); //Volá Firebase metodu
+      await signInWithEmailAndPassword(auth, email, password);
       setMessage("Přihlášení proběhlo úspěšně!");
+      if (setShowLoginModal) setShowLoginModal(false); // 🔧 zavře modal
+      // navigate("/lists"); // 🔧 přesměruje
     } catch (error) {
       alert("Chyba přihlášení: " + error.message);
     }
@@ -52,13 +58,17 @@ export const LoginForm = () => {
 
       {message && <p className="message">{message}</p>}
 
-      <button type="submit" onClick={handleLogin}>
+      <button
+        className="login-button-modal"
+        type="submit"
+        onClick={handleLogin}
+      >
         Přihlásit
       </button>
 
-      <button type="submit" onClick={(e) => signOut(auth)}>
+      {/* <button type="submit" onClick={(e) => signOut(auth)}>
         Odhlásit se
-      </button>
+      </button> */}
     </div>
   );
 };

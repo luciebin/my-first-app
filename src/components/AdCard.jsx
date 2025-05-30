@@ -1,3 +1,5 @@
+import "../css/adCard.css";
+
 export const AdCard = ({
   //prijímá data a funkce jako props, zobrazuje jeden inzerát.
   user, //přihlášený uživatel
@@ -9,6 +11,7 @@ export const AdCard = ({
   handleEdit, //Funkce, která nastaví editingId na info.id a předvyplní editedData podle info
   handleSaveEdit, //funkce, která uloží upravená data do Firebase a ukončí editační režim
   handleDelete, //Funkce na smazání inzerátu (z Firebase)
+  setShowLoginModal,
   // handleClick,
   // showReplyId,
   // replyText,
@@ -22,6 +25,10 @@ export const AdCard = ({
     <li
       className="card"
       onClick={() => {
+        if (typeof setShowLoginModal === "function" && !user) {
+          setShowLoginModal(true);
+          return;
+        }
         if (user && user.uid !== info.uid) {
           openReplies(info);
         }
@@ -68,8 +75,15 @@ export const AdCard = ({
             }
           />
           <div className="card-buttons">
-            <button onClick={() => handleSaveEdit(info.id)}>Uložit</button>
-            <button onClick={() => setEditingId(null)}>Zrušit</button>
+            <button
+              className="card-btn"
+              onClick={() => handleSaveEdit(info.id)}
+            >
+              Uložit
+            </button>
+            <button className="card-btn" onClick={() => setEditingId(null)}>
+              Zrušit
+            </button>
           </div>
         </div>
       ) : (
@@ -115,7 +129,7 @@ export const AdCard = ({
           )}
 
           {/* Seznam odpovědí (jen pro autora inzerátu)*/}
-          {user?.uid === info.uid && (
+          {/* {user?.uid === info.uid && (
             <div className="reply-list">
               <h4>Odpovědi:</h4>
               {replies
@@ -128,7 +142,7 @@ export const AdCard = ({
                   </div>
                 ))}
             </div>
-          )}
+          )} */}
           {/* 
           {user && user.uid !== info.uid && (
             <button onClick={() => openReplies(info)}>Odpovědět</button>
@@ -136,10 +150,14 @@ export const AdCard = ({
 
           {user?.uid === info.uid && ( // Pokud přihlášený uživatel je autorem inzerátu, ukážou se tlačítka
             <div className="card-buttons">
-              <button onClick={() => handleEdit(info)}>Upravit</button>{" "}
+              <button className="card-btn" onClick={() => handleEdit(info)}>
+                Upravit
+              </button>{" "}
               {/*
               přepne do editačního režimu*/}
-              <button onClick={() => handleDelete(info)}>Smazat</button>{" "}
+              <button className="card-btn" onClick={() => handleDelete(info)}>
+                Smazat
+              </button>{" "}
               {/*smaže
               inzerát*/}
             </div>

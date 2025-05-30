@@ -246,48 +246,71 @@ export const ListOfAd = () => {
   return (
     <>
       {showLoginModal && <LoginModal setShowLoginModal={setShowLoginModal} />}
-      <div className="lists">
+      <div className={`lists ${showLoginModal ? "blur" : ""}`}>
         <header className="nav-bar">
-          {user && (
-            <div className="user-info">
-              <p>
-                Přihlášena jako <strong>{user.email}</strong>
-                {myReplies.length > 0 && (
-                  <span
-                    className="notif-icon"
-                    title="Nové odpovědi"
-                    onClick={() => {
-                      const userReplies = replies.filter(
-                        (reply) => reply.toUserId === user.uid
-                      );
-                      setCurrentReplies(userReplies);
-                      setShowReplyModal(true);
-                    }}
-                  >
-                    📩 {myReplies.length}
-                  </span>
-                )}
-              </p>
-              <button onClick={() => signOut(auth)}>Odhlásit</button>
-            </div>
-          )}
+          <div className="nav-top-row">
+            {user && (
+              <div className="user-info">
+                <p>
+                  Přihlášena jako <strong>{user.email}</strong>
+                  {myReplies.length > 0 && (
+                    <span
+                      className="notif-icon"
+                      title="Nové odpovědi"
+                      onClick={() => {
+                        const userReplies = replies.filter(
+                          (reply) => reply.toUserId === user.uid
+                        );
+                        setCurrentReplies(userReplies);
+                        setShowReplyModal(true);
+                      }}
+                    >
+                      📩 {replies.length}
+                    </span>
+                  )}
+                </p>
+                <button
+                  className="sign-out-button"
+                  onClick={() => signOut(auth)}
+                >
+                  Odhlásit
+                </button>
+              </div>
+            )}
 
-          <div className="lists-back-button">
-            <button
-              className="lists-go-back-button"
-              type="button"
-              onClick={() => navigate("/")}
-            >
-              Zpět
-            </button>
+            {!user && (
+              <>
+                <button
+                  className="login-button"
+                  onClick={() => setShowLoginModal(true)}
+                >
+                  Přihlásit se
+                </button>
+                {showLoginModal && (
+                  <LoginModal setShowLoginModal={setShowLoginModal} />
+                )}
+              </>
+            )}
           </div>
 
-          <FilterBar
-            selectedFilter={selectedFilter}
-            setSelectedFilter={setSelectedFilter}
-            searchQuery={searchQuery}
-            setSearchQuery={setSearchQuery}
-          />
+          <div className="nav-bottom-row">
+            <div className="list-back-button">
+              <button
+                className="go-back-button-list"
+                type="button"
+                onClick={() => navigate("/")}
+              >
+                Zpět
+              </button>
+            </div>
+
+            <FilterBar
+              selectedFilter={selectedFilter}
+              setSelectedFilter={setSelectedFilter}
+              searchQuery={searchQuery}
+              setSearchQuery={setSearchQuery}
+            />
+          </div>
         </header>
         {message && <p className="notice">{message}</p>}
         <AdCardsWrapper
@@ -302,6 +325,7 @@ export const ListOfAd = () => {
           handleEdit={handleEdit}
           handleSaveEdit={handleSaveEdit}
           handleDelete={handleDelete}
+          setShowLoginModal={setShowLoginModal}
           // handleClick={handleClick}
           // showReplyId={showReplyId}
           // setShowReplyId={setShowReplyId}

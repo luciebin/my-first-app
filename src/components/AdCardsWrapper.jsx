@@ -1,6 +1,8 @@
 import React from "react";
 import { AdCard } from "./AdCard";
 
+import "../css/lists.css";
+
 export const AdCardsWrapper = ({
   // obálka, která zpracuje a zobrazí seznam inzerátů
   formList, //seznam všech inzerátů
@@ -14,6 +16,7 @@ export const AdCardsWrapper = ({
   handleEdit, //Funkce, která připraví izerát na úpravu
   handleSaveEdit, //funkce, která uloží upravená data
   handleDelete, //Funkce na smazání inzerátu (z Firebase)
+  setShowLoginModal,
   // handleClick, // zobrazí formulář pro odpověď
   // showReplyId, // ID inzerátu, ke kterému se odpovídá
   // setShowReplyId, // nastaví výše zmíněné ID
@@ -38,7 +41,7 @@ export const AdCardsWrapper = ({
   return (
     <>
       {filteredList.length === 0 ? ( //Pokud nenajde žádný inzerát, vypíše se hláška
-        <p>Žádné výsledky.</p>
+        <p className="notice">Žádné výsledky.</p>
       ) : (
         //Pokud nějaké inzeráty existují, zobrazí se seznam (ul) a každý z nich jako AdCard.
         <ul className="cards">
@@ -60,6 +63,7 @@ export const AdCardsWrapper = ({
               // replyText={replyText}
               // setReplyText={setReplyText}
               // handleReply={handleReply}
+              setShowLoginModal={setShowLoginModal}
               replies={replies}
               openReplies={openReplies}
               // isReplying={isReplying}
