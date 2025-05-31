@@ -269,10 +269,7 @@ export const ListOfAd = () => {
                     </span>
                   )}
                 </p>
-                <button
-                  className="sign-out-button"
-                  onClick={() => signOut(auth)}
-                >
+                <button className="sign-out-btn" onClick={() => signOut(auth)}>
                   Odhlásit
                 </button>
               </div>
@@ -281,7 +278,7 @@ export const ListOfAd = () => {
             {!user && (
               <>
                 <button
-                  className="login-button"
+                  className="sign-in-btn"
                   onClick={() => setShowLoginModal(true)}
                 >
                   Přihlásit se

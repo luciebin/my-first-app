@@ -42,13 +42,24 @@
   margin-left: 0.5rem;
 }
 
-.sign-out-button {
+.sign-out-btn,
+.sign-in-btn {
   border: none;
   border-radius: var(--border-radius);
   cursor: pointer;
   background-color: var(--color-buttons);
   font-family: var(--font-buttons);
   padding: 8px 25px;
+}
+
+.sign-in-btn {
+  padding: 12px 25px;
+  background-color: var(--color-green-light);
+}
+
+.sign-in-btn:hover {
+  transform: scale(1.02);
+  background-color: var(--color-btn-hover);
 }
 
 .nav-bottom-row {
