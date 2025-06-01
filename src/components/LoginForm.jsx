@@ -2,14 +2,15 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
+import { Button } from "./Button";
 
 import "../css/logSignForm.css";
 
 export const LoginForm = ({ setShowLoginModal }) => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
-  const navigate = useNavigate();
   const emailRef = useRef(); // odkazuje na input a umožní mu např. focus.
 
   useEffect(() => {
@@ -28,7 +29,7 @@ export const LoginForm = ({ setShowLoginModal }) => {
       await signInWithEmailAndPassword(auth, email, password);
       setMessage("Přihlášení proběhlo úspěšně!");
       if (setShowLoginModal) setShowLoginModal(false); // 🔧 zavře modal
-      // navigate("/lists"); // 🔧 přesměruje
+      // navigate("/addform"); // 🔧 přesměruje
     } catch (error) {
       alert("Chyba přihlášení: " + error.message);
     }
@@ -40,7 +41,7 @@ export const LoginForm = ({ setShowLoginModal }) => {
         <label htmlFor="email">Email</label>
         <input
           ref={emailRef}
-          id="email"
+          id="login-email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         ></input>
@@ -49,7 +50,7 @@ export const LoginForm = ({ setShowLoginModal }) => {
       <div className="login-pass">
         <label htmlFor="password">Heslo</label>
         <input
-          id="password"
+          id="login-password"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
@@ -58,13 +59,9 @@ export const LoginForm = ({ setShowLoginModal }) => {
 
       {message && <p className="message">{message}</p>}
 
-      <button
-        className="login-button-modal"
-        type="submit"
-        onClick={handleLogin}
-      >
+      <Button type="submit" onClick={handleLogin}>
         Přihlásit
-      </button>
+      </Button>
 
       {/* <button type="submit" onClick={(e) => signOut(auth)}>
         Odhlásit se

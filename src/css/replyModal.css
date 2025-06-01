@@ -1,0 +1,91 @@
+.modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.reply-modal {
+  background: var(--color-bg-list);
+  padding: 1rem;
+  border-radius: 10px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  position: relative;
+  height: 280px;
+}
+
+.show-reply-form {
+  width: 100%;
+  height: 100px;
+}
+
+.reply-modal h2 {
+  font-size: 1.5rem;
+}
+
+.replies {
+  list-style: none;
+}
+
+.reply-form {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+textarea {
+  border: 1px solid #e0dfdf;
+  border-radius: 5px;
+  width: 280px;
+  height: 120px;
+  font-family: var(--font-secondary);
+  font-size: 1.1rem;
+}
+
+.send-button {
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  background-color: var(--color-green-light);
+  font-family: var(--font-secondary);
+  padding: 8px 20px;
+}
+
+.send-button:hover {
+  transform: scale(1.1);
+  background-color: var(--color-btn-hover);
+}
+
+.close-button {
+  position: absolute;
+  top: 0.1rem;
+  right: 1.1rem;
+  background: transparent;
+  border: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: #424040;
+}
+
+.close-button:hover {
+  color: #000;
+  font-size: 2rem;
+}
+
+.blur {
+  filter: blur(5px);
+  pointer-events: none;
+  user-select: none;
+}
+
+.show-reply-form {
+}

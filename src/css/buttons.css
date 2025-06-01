@@ -1,0 +1,89 @@
+.custom-button {
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  background-color: var(--color-buttons);
+  font-family: var(--font-buttons);
+  padding: 10px 25px;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.custom-button:hover {
+  background-color: var(--color-btn-hover);
+  transform: scale(1.05);
+}
+
+.custom-button.small {
+  background-color: var(--color-bg-list);
+  padding: 6px 10px;
+  font-size: 0.9rem;
+  margin-top: 10px;
+  flex: 1;
+  text-align: center;
+}
+
+.custom-button.green {
+  background-color: var(--color-green-light);
+  padding: 12px 30px;
+}
+
+.custom-button.close {
+  position: absolute;
+  top: -0.1rem;
+  right: -0.1rem;
+  background: transparent;
+  font-size: 1.6rem;
+  cursor: pointer;
+  color: #424040;
+}
+
+.custom-button.close:hover {
+  color: #000;
+  font-size: 2rem;
+}
+
+.custom-button.main {
+  flex: 1;
+  text-align: center;
+  padding: 1px 20px;
+  font-family: var(--font-primary);
+}
+
+.custom-button.main:hover {
+  background-color: var(--color-green);
+  transform: scale(1.05);
+  color: var(--color-buttons);
+}
+
+/* === Media queries === */
+@media (min-width: 768px) {
+  .custom-button.small {
+    font-size: 1rem;
+    padding: 8px 20px;
+  }
+
+  .custom-button.close {
+    top: -0.8rem;
+    right: -0.8rem;
+    font-size: 1.8rem;
+  }
+
+  .custom-button.main {
+    padding: 1px 20px;
+    font-size: 1.3rem;
+  }
+}
+
+/* desktop */
+@media (min-width: 1024px) {
+  .custom-button {
+    font-size: 1.1rem;
+  }
+
+  .custom-button.close {
+    top: -1rem;
+    right: -1rem;
+    font-size: 2rem;
+  }
+}

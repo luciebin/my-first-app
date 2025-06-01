@@ -1,4 +1,5 @@
 import "../css/adCard.css";
+import { Button } from "./Button";
 
 export const AdCard = ({
   //prijímá data a funkce jako props, zobrazuje jeden inzerát.
@@ -17,16 +18,17 @@ export const AdCard = ({
   // replyText,
   // setReplyText,
   // handleReply,
-  replies,
   openReplies,
+  setMessage,
   // isReplying,
 }) => {
   return (
-    <li
+    <div
       className="card"
       onClick={() => {
         if (typeof setShowLoginModal === "function" && !user) {
           setShowLoginModal(true);
+          setMessage("Pro odpověď se musíš přihlásit nebo zaregistrovat.");
           return;
         }
         if (user && user.uid !== info.uid) {
@@ -75,15 +77,12 @@ export const AdCard = ({
             }
           />
           <div className="card-buttons">
-            <button
-              className="card-btn"
-              onClick={() => handleSaveEdit(info.id)}
-            >
+            <Button variant="small" onClick={() => handleSaveEdit(info.id)}>
               Uložit
-            </button>
-            <button className="card-btn" onClick={() => setEditingId(null)}>
+            </Button>
+            <Button variant="small" onClick={() => setEditingId(null)}>
               Zrušit
-            </button>
+            </Button>
           </div>
         </div>
       ) : (
@@ -150,20 +149,18 @@ export const AdCard = ({
 
           {user?.uid === info.uid && ( // Pokud přihlášený uživatel je autorem inzerátu, ukážou se tlačítka
             <div className="card-buttons">
-              <button className="card-btn" onClick={() => handleEdit(info)}>
+              <Button variant="small" onClick={() => handleEdit(info)}>
                 Upravit
-              </button>{" "}
+              </Button>
               {/*
               přepne do editačního režimu*/}
-              <button className="card-btn" onClick={() => handleDelete(info)}>
+              <Button variant="small" onClick={() => handleDelete(info)}>
                 Smazat
-              </button>{" "}
-              {/*smaže
-              inzerát*/}
+              </Button>
             </div>
           )}
         </div>
       )}
-    </li>
+    </div>
   );
 };

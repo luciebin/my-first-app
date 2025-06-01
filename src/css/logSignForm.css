@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 15px;
+  gap: 20px;
   text-align: center;
 }
 
@@ -20,19 +20,39 @@
 .login-pass input,
 .login-email input {
   width: 200px;
+  border: var(--border-inputs);
+  border-radius: 3px;
 }
 
-.login-button-modal {
-  border: none;
-  border-radius: 10px;
-  background-color: var(--color-buttons);
-  height: 40px;
-  width: 150px;
-  margin-top: 10px;
-  margin-bottom: 20px;
-  box-shadow: -2px -2px 10px #a3a0a0, 2px 2px 10px #a3a0a0;
+.modal-switch-btn {
+  gap: 20px;
 }
 
-.login-button-modal:hover {
-  background-color: var(--color-btn-hover);
+@media (min-width: 768px) {
+  .login-email label,
+  .login-pass label {
+    font-size: 1rem;
+  }
+
+  .login-pass input,
+  .login-email input {
+    width: 250px;
+    height: 35px;
+    font-size: 1.1rem;
+  }
+}
+
+/* desktop */
+@media (min-width: 1024px) {
+  .login-email label,
+  .login-pass label {
+    font-size: 1.1rem;
+  }
+
+  .login-pass input,
+  .login-email input {
+    width: 320px;
+    height: 30px;
+    font-size: 1.1rem;
+  }
 }

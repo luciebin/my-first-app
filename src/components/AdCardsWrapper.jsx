@@ -26,6 +26,7 @@ export const AdCardsWrapper = ({
   replies, // seznam všech odpovědí
   openReplies, // otevře modal s odpověďmi
   // isReplying, // stav, zda probíhá odesílání
+  setMessage,
 }) => {
   const filteredList = formList.filter((item) => {
     const matchFilter = selectedFilter //filtr kategorie
@@ -44,7 +45,7 @@ export const AdCardsWrapper = ({
         <p className="notice">Žádné výsledky.</p>
       ) : (
         //Pokud nějaké inzeráty existují, zobrazí se seznam (ul) a každý z nich jako AdCard.
-        <ul className="cards">
+        <div className="cards">
           {filteredList.map((info) => (
             <AdCard
               key={info.id}
@@ -66,10 +67,11 @@ export const AdCardsWrapper = ({
               setShowLoginModal={setShowLoginModal}
               replies={replies}
               openReplies={openReplies}
+              setMessage={setMessage}
               // isReplying={isReplying}
             />
           ))}
-        </ul>
+        </div>
       )}
     </>
   );

@@ -7,6 +7,7 @@ import { LoginModal } from "./LoginModal";
 
 import "../css/addform.css";
 import "../css/loginModal.css";
+import { Button } from "./Button";
 
 export const AddForm = () => {
   const navigate = useNavigate();
@@ -129,24 +130,15 @@ export const AddForm = () => {
       <div className={`addForm ${showLoginModal ? "blur" : ""}`}>
         <div className="nav-bar-form">
           <div className="back-button">
-            <button
-              className="go-back-button"
-              type="button"
-              onClick={() => navigate("/")}
-            >
-              Zpět
-            </button>
+            <Button onClick={() => navigate("/")}>Zpět</Button>
           </div>
 
           {!user && (
             <>
               <div className="login-button-container">
-                <button
-                  className="login-button"
-                  onClick={() => setShowLoginModal(true)}
-                >
+                <Button onClick={() => setShowLoginModal(true)}>
                   Přihlásit se
-                </button>
+                </Button>
               </div>
               {/* {showLoginModal && (
                 <LoginModal setShowLoginModal={setShowLoginModal} />
@@ -242,9 +234,9 @@ export const AddForm = () => {
           </div>
 
           <div className="form-button">
-            <button className="add-button" type="submit">
+            <Button variant="green" type="submit">
               Odeslat
-            </button>
+            </Button>
           </div>
         </form>
       </div>

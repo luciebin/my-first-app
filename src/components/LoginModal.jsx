@@ -3,8 +3,9 @@ import { LoginForm } from "./LoginForm";
 import { SignUpForm } from "./SignUpForm";
 
 import "../css/loginModal.css";
+import { Button } from "./Button";
 
-export const LoginModal = ({ setShowLoginModal }) => {
+export const LoginModal = ({ setShowLoginModal, message }) => {
   //komponenta, která přijímá prop setShowLoginModal, díky které můžu zavřít modal
   const [isLogin, setIsLogin] = useState(true); //určuje, jestli se zobrazuje přihlašovací (true) nebo registrační (false) formulář
 
@@ -19,42 +20,34 @@ export const LoginModal = ({ setShowLoginModal }) => {
   return (
     <div className="modal">
       <div className="modal-content">
-        <p>Pro přidání inzerátu se nejdřív přihlas nebo registruj</p>
+        {message && <p className="notice-message">{message}</p>}
 
         {isLogin ? (
           <>
             <LoginForm setShowLoginModal={setShowLoginModal} />
             <div className="modal-switch-btn">
-              <button
-                onClick={() => setIsLogin(false)}
-                type="button"
-                className="switch-auth"
-              >
+              <Button variant="green" onClick={() => setIsLogin(false)}>
                 Nemáš účet? Zaregistruj se
-              </button>
+              </Button>
             </div>
           </>
         ) : (
           <>
             <SignUpForm />
             <div className="modal-switch-btn">
-              <button
-                onClick={() => setIsLogin(true)}
-                type="button"
-                className="switch-auth"
-              >
+              <Button variant="green" onClick={() => setIsLogin(true)}>
                 Už máš účet? Přihlaš se
-              </button>
+              </Button>
             </div>
           </>
         )}
-        <button
-          className="close-button"
+        <Button
+          variant="close"
           onClick={() => setShowLoginModal(false)}
           title="Zavřít"
         >
           &times;
-        </button>
+        </Button>
       </div>
     </div>
   );

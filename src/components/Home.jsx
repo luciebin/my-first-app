@@ -1,4 +1,6 @@
 import { useNavigate } from "react-router";
+import { Button } from "./Button";
+
 import "../css/home.css";
 
 export const Home = () => {
@@ -32,15 +34,12 @@ export const Home = () => {
           </p>
           <p>Spojujeme lidi, kteří se chtějí opravdu potkat.</p>
           <div className="home-buttons">
-            <button
-              className="home-add-button"
-              onClick={() => navigate("/addform")}
-            >
+            <Button variant="main" onClick={() => navigate("/addform")}>
               Přidat inzerát
-            </button>
-            <button className="show-button" onClick={() => navigate("/lists")}>
+            </Button>
+            <Button variant="main" onClick={() => navigate("/lists")}>
               Přidat se k někomu
-            </button>
+            </Button>
           </div>
         </div>
       </div>

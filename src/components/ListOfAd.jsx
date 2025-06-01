@@ -21,6 +21,7 @@ import { AdCardsWrapper } from "./AdCardsWrapper";
 import { ReplyModal } from "./ReplyModal";
 
 import "../css/lists.css";
+import { Button } from "./Button";
 
 export const ListOfAd = () => {
   const navigate = useNavigate(); //přesměrování
@@ -218,12 +219,11 @@ export const ListOfAd = () => {
   }, [searchQuery]);
 
   useEffect(() => {
-    // automatické skrytí hlášek (po 3s)
-    if (message) {
+    if (message && !showLoginModal) {
       const timer = setTimeout(() => setMessage(""), 3000);
       return () => clearTimeout(timer);
     }
-  }, [message]);
+  }, [message, showLoginModal]);
 
   useEffect(() => {
     //odpovědi na inzerát
@@ -246,6 +246,9 @@ export const ListOfAd = () => {
   return (
     <>
       {showLoginModal && <LoginModal setShowLoginModal={setShowLoginModal} />}
+      {showLoginModal && (
+        <LoginModal setShowLoginModal={setShowLoginModal} message={message} />
+      )}
       <div className={`lists ${showLoginModal ? "blur" : ""}`}>
         <header className="nav-bar">
           <div className="nav-top-row">
@@ -269,38 +272,36 @@ export const ListOfAd = () => {
                     </span>
                   )}
                 </p>
-                <button className="sign-out-btn" onClick={() => signOut(auth)}>
-                  Odhlásit
-                </button>
+                <Button onClick={() => signOut(auth)}>Odhlásit</Button>
               </div>
             )}
-
             {!user && (
               <>
-                <button
-                  className="sign-in-btn"
-                  onClick={() => setShowLoginModal(true)}
-                >
+                <Button onClick={() => setShowLoginModal(true)}>
                   Přihlásit se
-                </button>
-                {showLoginModal && (
+                </Button>
+                {/* {showLoginModal && (
                   <LoginModal setShowLoginModal={setShowLoginModal} />
-                )}
+                )} */}
               </>
             )}
+
+            <Button
+              variant="green"
+              onClick={() => {
+                if (!user) {
+                  setShowLoginModal(true);
+                  setMessage("Pro přidání inzerátu se musíš přihlásit.");
+                  return;
+                }
+                navigate("/addform");
+              }}
+            >
+              Přidat inzerát
+            </Button>
           </div>
-
           <div className="nav-bottom-row">
-            <div className="list-back-button">
-              <button
-                className="go-back-button-list"
-                type="button"
-                onClick={() => navigate("/")}
-              >
-                Zpět
-              </button>
-            </div>
-
+            <Button onClick={() => navigate("/")}>Zpět</Button>
             <FilterBar
               selectedFilter={selectedFilter}
               setSelectedFilter={setSelectedFilter}
@@ -309,7 +310,7 @@ export const ListOfAd = () => {
             />
           </div>
         </header>
-        {message && <p className="notice">{message}</p>}
+        {/* {message && <p className="notice">{message}</p>} */}
         <AdCardsWrapper
           formList={formList}
           selectedFilter={selectedFilter}
@@ -332,6 +333,7 @@ export const ListOfAd = () => {
           replies={replies}
           openReplies={openReplies}
           // isReplying={isReplying}
+          setMessage={setMessage}
         />
         {showReplyModal && (
           <ReplyModal

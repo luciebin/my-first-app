@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
+import { Button } from "./Button";
 
 import "../css/logSignForm.css";
 
@@ -38,7 +39,7 @@ export const SignUpForm = () => {
       <div className="login-email">
         <label htmlFor="email">Email</label>
         <input
-          id="email"
+          id="signup-email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         ></input>
@@ -47,7 +48,7 @@ export const SignUpForm = () => {
       <div className="login-pass">
         <label htmlFor="password">Heslo</label>
         <input
-          id="password"
+          id="signup-password"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
@@ -56,13 +57,9 @@ export const SignUpForm = () => {
 
       {message && <p className="message">{message}</p>}
 
-      <button
-        className="login-button-modal"
-        onClick={handleSignUp}
-        disabled={loading}
-      >
+      <Button onClick={handleSignUp} disabled={loading}>
         {loading ? "Probíhá registrace..." : "Zaregistrovat se"}
-      </button>
+      </Button>
     </div>
   );
 };

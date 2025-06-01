@@ -1,79 +1,90 @@
 .nav-bar-form {
   display: flex;
-  padding: 1rem;
   align-items: center;
   justify-content: space-between;
+  padding: 1rem;
   height: 90px;
   width: 100%;
-  box-shadow: inset 0 0 15px rgb(0 0 0 / 0.1);
-  font-family: var(--font-buttons);
   position: fixed;
   top: 0;
   left: 0;
   background-color: var(--color-bg-addform);
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.1);
+  font-family: var(--font-buttons);
+  z-index: 100;
 }
 
 h2 {
   text-align: center;
-  font-size: 2.5rem;
-  margin-bottom: 20px;
+  font-size: 2.3rem;
   font-family: var(--font-primary);
 }
 
 .addForm {
-  flex-direction: column;
-  height: 100vh;
-  background-color: var(--color-bg-addform);
-}
-
-.form-row,
-.form-button,
-.checkbox,
-.form-choose,
-.addForm {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
+  flex-direction: column;
+  background-color: var(--color-bg-addform);
+  min-height: 100vh;
+  padding-top: 90px; /* kvůli fixnímu navbaru */
 }
 
 .fill-form {
-  width: 400px;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 1rem;
+  display: flex;
+  /* flex: 1; */
+  flex-direction: column;
+  gap: 15px;
   font-family: var(--font-secondary);
-  margin-top: 100px;
-  height: 100vh;
-  padding-top: 90px;
+  font-size: 1.2rem;
 }
 
-.form-row {
+.form-row,
+.checkbox,
+.form-choose {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
   gap: 10px;
+}
+
+.form-button {
+  align-items: center;
+  justify-content: center;
+  display: flex;
 }
 
 .form-row label {
   width: 100px;
+  text-align: left;
 }
 
 .form-row input,
+.form-row textarea,
+select {
+  width: 100%;
+  padding: 5px;
+  font-size: 1.2rem;
+  border: var(--border-inputs);
+}
+
 textarea {
-  width: 250px;
-  padding-left: 2px;
+  height: 100px;
+  resize: vertical;
 }
 
 .form-row-category {
   display: flex;
   align-items: center;
-  margin: 0 0 20px 20px;
-}
-
-#activity {
-  margin-left: 40px;
-}
-
-textarea {
-  height: 100px;
+  gap: 25px;
 }
 
 .checkbox {
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   gap: 20px;
 }
 
@@ -82,30 +93,50 @@ input[type="checkbox"] {
   height: 20px;
 }
 
-.add-button,
-.go-back-button,
-.login-button {
-  border: none;
-  border-radius: var(--border-radius);
-  cursor: pointer;
-  background-color: var(--color-buttons);
-  font-family: var(--font-buttons);
-  padding: 13px 30px;
-}
-
-.add-button:hover,
-.go-back-button:hover,
-.login-button:hover {
-  transform: scale(1.1);
-  background-color: var(--color-btn-hover);
-}
-
-.add-button {
-  background-color: var(--color-green-light);
-}
-
 .blur {
   filter: blur(5px);
   pointer-events: none;
   user-select: none;
+}
+
+/* Tablety */
+@media (min-width: 768px) {
+  #activity {
+    width: 150px;
+  }
+
+  .checkbox {
+    margin-bottom: 15px;
+  }
+}
+
+/* desktop */
+@media (min-width: 1024px) {
+  .fill-form {
+    max-width: 800px;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .form-row {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .form-row label {
+    min-width: 100px;
+  }
+
+  .form-row input {
+    height: 40px;
+  }
+
+  #message {
+    height: 170px;
+  }
+
+  .checkbox {
+    margin-top: 20px;
+    margin-bottom: 30px;
+  }
 }
