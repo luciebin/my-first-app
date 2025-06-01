@@ -7,7 +7,6 @@ import { Button } from "./Button";
 import "../css/logSignForm.css";
 
 export const LoginForm = ({ setShowLoginModal }) => {
-  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
