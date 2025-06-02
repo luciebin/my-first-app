@@ -268,7 +268,7 @@ export const ListOfAd = () => {
                         setShowReplyModal(true);
                       }}
                     >
-                      📩 {replies.length}
+                      📩 {myReplies.length}
                     </span>
                   )}
                 </p>
