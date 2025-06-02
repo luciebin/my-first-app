@@ -28,6 +28,10 @@
   gap: 20px;
 }
 
+input[type="password"] {
+  -webkit-text-security: disc;
+}
+
 @media (min-width: 768px) {
   .login-email label,
   .login-pass label {
