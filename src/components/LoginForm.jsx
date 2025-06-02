@@ -29,7 +29,22 @@ export const LoginForm = ({ setShowLoginModal }) => {
       if (setShowLoginModal) setShowLoginModal(false); // 🔧 zavře modal
       // navigate("/addform"); // 🔧 přesměruje
     } catch (error) {
-      alert("Chyba přihlášení: " + error.message);
+      let msg = "Chyba při přihlášení.";
+      switch (error.code) {
+        case "auth/invalid-email":
+          msg = "Neplatný email.";
+          break;
+        case "auth/user-not-found":
+          msg = "Uživatel neexistuje.";
+          break;
+        case "auth/wrong-password":
+          msg = "Nesprávné heslo.";
+          break;
+        case "auth/too-many-requests":
+          msg = "Příliš mnoho pokusů. Zkus to později.";
+          break;
+      }
+      alert(msg);
     }
   };
 

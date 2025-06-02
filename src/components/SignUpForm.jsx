@@ -28,7 +28,19 @@ export const SignUpForm = () => {
       await createUserWithEmailAndPassword(auth, email, password); //Používá Firebase funkci pro vytvoření účtu
       setMessage("Registrace proběhla úspěšně!");
     } catch (error) {
-      alert("Chyba registrace: " + error.message);
+      let msg = "Chyba při registraci.";
+      switch (error.code) {
+        case "auth/email-already-in-use":
+          msg = "Tento e-mail už je zaregistrován.";
+          break;
+        case "auth/invalid-email":
+          msg = "Neplatný e-mail.";
+          break;
+        case "auth/weak-password":
+          msg = "Heslo je příliš slabé.";
+          break;
+      }
+      alert(msg);
     } finally {
       setLoading(false);
     }
