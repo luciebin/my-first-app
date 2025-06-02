@@ -249,6 +249,7 @@ export const ListOfAd = () => {
       {showLoginModal && (
         <LoginModal setShowLoginModal={setShowLoginModal} message={message} />
       )}
+
       <div className={`lists ${showLoginModal ? "blur" : ""}`}>
         <header className="nav-bar">
           <div className="nav-top-row">
@@ -310,7 +311,7 @@ export const ListOfAd = () => {
             />
           </div>
         </header>
-
+        {message && <p className="notice-message">{message}</p>}
         <AdCardsWrapper
           formList={formList}
           selectedFilter={selectedFilter}
@@ -335,7 +336,7 @@ export const ListOfAd = () => {
           // isReplying={isReplying}
           setMessage={setMessage}
         />
-        {message && <p className="notice-message">{message}</p>}
+
         {showReplyModal && (
           <ReplyModal
             replies={currentReplies}
