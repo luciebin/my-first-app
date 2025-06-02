@@ -310,7 +310,7 @@ export const ListOfAd = () => {
             />
           </div>
         </header>
-        {/* {message && <p className="notice">{message}</p>} */}
+        {message && <p className="notice-message">{message}</p>}
         <AdCardsWrapper
           formList={formList}
           selectedFilter={selectedFilter}
@@ -345,6 +345,7 @@ export const ListOfAd = () => {
             handleReply={handleReply}
             isReplying={isReplying}
             onClose={() => setShowReplyModal(false)}
+            // message={message}
           />
         )}
       </div>
