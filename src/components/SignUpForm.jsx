@@ -39,6 +39,8 @@ export const SignUpForm = () => {
         case "auth/weak-password":
           msg = "Heslo je příliš slabé.";
           break;
+        default:
+          setMessage("Chyba přihlášení.");
       }
       alert(msg);
     } finally {

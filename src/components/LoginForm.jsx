@@ -43,6 +43,8 @@ export const LoginForm = ({ setShowLoginModal }) => {
         case "auth/too-many-requests":
           msg = "Příliš mnoho pokusů. Zkus to později.";
           break;
+        default:
+          setMessage("Chyba přihlášení.");
       }
       alert(msg);
     }
