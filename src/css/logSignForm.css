@@ -32,6 +32,7 @@ input[type="password"] {
   -webkit-text-security: disc;
 }
 
+/* tablet */
 @media (min-width: 768px) {
   .login-email label,
   .login-pass label {

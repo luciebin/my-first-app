@@ -23,7 +23,7 @@
   max-width: 100%;
 }
 
-/* tablety */
+/* tablet */
 @media (min-width: 768px) {
   .card-edit textarea {
     font-size: 1.2rem;

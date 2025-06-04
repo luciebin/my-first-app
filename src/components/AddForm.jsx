@@ -4,19 +4,18 @@ import { auth, db } from "../firebase";
 import { collection, addDoc } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import { LoginModal } from "./LoginModal";
+import { Button } from "./Button";
 
 import "../css/addform.css";
 import "../css/loginModal.css";
-import { Button } from "./Button";
 
 export const AddForm = () => {
   const navigate = useNavigate();
-  const [customOption, setCustomOption] = useState(""); //možnost vybrat vlastní aktivitu
-  const [agreement, setAgreement] = useState(false); //ošetří zaškrtnutí checkboxu
+  const [customOption, setCustomOption] = useState("");
+  const [agreement, setAgreement] = useState(false);
   const [user, setUser] = useState(null);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [formData, setFormData] = useState({
-    //objekt se všemi základními poli formuláře
     name: "",
     age: "",
     date: "",
@@ -25,7 +24,6 @@ export const AddForm = () => {
   });
 
   const defaultItems = [
-    //moje nabídka kategorií
     "Vyber",
     "Sport",
     "Umění",
@@ -36,7 +34,6 @@ export const AddForm = () => {
 
   //VALIDACE
   const isFormValid = () => {
-    //funkce na kontrolu vyplnění polí (pokud ne - false, pokud ano - true)
     if (
       !formData.name.trim() ||
       !formData.age.trim() ||
@@ -55,7 +52,6 @@ export const AddForm = () => {
 
   //RESET
   const resetForm = () => {
-    // vyčistí všechna pole i checkbox
     setFormData({
       name: "",
       age: "",
@@ -69,23 +65,17 @@ export const AddForm = () => {
 
   //ODESLÁNÍ
   const handleSubmit = async (e) => {
-    // hlavní funkce, která se spustí po kliknutí na „Odeslat“
-    e.preventDefault(); //zamezí znovu načtení stránky
-
+    e.preventDefault();
     if (!user) {
-      // kontrola, že je uživatel přihlášený
       alert("Musíš být přihlášen.");
       return;
     }
-
     if (!isFormValid()) {
-      // spustí se validace – pokud něco chybí, uživatel je upozorněn.
       alert("Zkontroluj všechna pole a souhlas.");
       return;
     }
 
     const finalData = {
-      // připraví se data, která se uloží do Firestore. Uživatel se přidá jako email a uid
       ...formData,
       activity: formData.activity === "Jiné" ? customOption : formData.activity,
       email: user.email,
@@ -95,12 +85,10 @@ export const AddForm = () => {
     //ULOŽENÍ do Firestore
     try {
       await addDoc(collection(db, "formList"), {
-        //Přidá nový dokument do databáze (kolekce formList)
         ...finalData,
         createdAt: new Date(),
       });
 
-      // vyčistí formulář a přesměruje uživatele na seznam inzerátů.
       resetForm();
       navigate("/lists");
     } catch (error) {
@@ -110,7 +98,6 @@ export const AddForm = () => {
   };
 
   useEffect(() => {
-    //Sleduje, jestli je uživatel přihlášený, pokud ne → otevře modal
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setShowLoginModal(!currentUser);
@@ -121,12 +108,11 @@ export const AddForm = () => {
 
   return (
     <>
-      {showLoginModal && ( //Pokud je showLoginModal true → zobrazí se LoginModal...
+      {showLoginModal && (
         <div className="modal">
           <LoginModal setShowLoginModal={setShowLoginModal} />
         </div>
       )}
-      {/* ...Jinak se zobrazí formulář*/}
       <div className={`addForm ${showLoginModal ? "blur" : ""}`}>
         <div className="nav-bar-form">
           <div className="back-button">
@@ -140,9 +126,6 @@ export const AddForm = () => {
                   Přihlásit se
                 </Button>
               </div>
-              {/* {showLoginModal && (
-                <LoginModal setShowLoginModal={setShowLoginModal} />
-              )} */}
             </>
           )}
         </div>
@@ -177,7 +160,7 @@ export const AddForm = () => {
               type="date"
               id="date"
               value={formData.date}
-              min={new Date().toISOString().split("T")[0]} // dnešní datum
+              min={new Date().toISOString().split("T")[0]}
               onChange={(e) =>
                 setFormData({ ...formData, date: e.target.value })
               }

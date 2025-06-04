@@ -1,11 +1,10 @@
 import React from "react";
 
 export const FilterBar = ({
-  //Komponenta dostává 4 props:
-  selectedFilter, // aktuálně vybraný filtr (např. "Sport")
-  setSelectedFilter, //funkce, která mění hodnotu filtru
-  searchQuery, // aktuální text v hledání
-  setSearchQuery, //funkce, která mění text v hledání
+  selectedFilter,
+  setSelectedFilter,
+  searchQuery,
+  setSearchQuery,
 }) => {
   return (
     <div className="filters">

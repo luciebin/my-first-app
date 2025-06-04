@@ -61,7 +61,7 @@
   color: var(--color-buttons);
 }
 
-/* === Media queries === */
+/* tablet */
 @media (min-width: 768px) {
   .custom-button.small {
     font-size: 1rem;

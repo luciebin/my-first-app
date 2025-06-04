@@ -2,25 +2,18 @@ import "../css/adCard.css";
 import { Button } from "./Button";
 
 export const AdCard = ({
-  //prijímá data a funkce jako props, zobrazuje jeden inzerát.
-  user, //přihlášený uživatel
-  info, // jednotlivý inzerát s daty (z pole formList). Obsahuje všechna data, která se zobrazují
-  editingId, //id inzerátu, který se právě upravuje
-  setEditingId, //Funkce na změnu hodnoty editingId
-  editedData, //Objekt, který drží aktuálně upravovaná data inzerátu
-  setEditedData, //Funkce, která mění editedData
-  handleEdit, //Funkce, která nastaví editingId na info.id a předvyplní editedData podle info
-  handleSaveEdit, //funkce, která uloží upravená data do Firebase a ukončí editační režim
-  handleDelete, //Funkce na smazání inzerátu (z Firebase)
+  user,
+  info,
+  editingId,
+  setEditingId,
+  editedData,
+  setEditedData,
+  handleEdit,
+  handleSaveEdit,
+  handleDelete,
   setShowLoginModal,
-  // handleClick,
-  // showReplyId,
-  // replyText,
-  // setReplyText,
-  // handleReply,
   openReplies,
   setLoginMessage,
-  // isReplying,
 }) => {
   return (
     <div
@@ -36,9 +29,8 @@ export const AdCard = ({
         }
       }}
     >
-      {editingId === info.id ? ( // pokud editingId odpovídá info.id, zobrazí se editační formulář
+      {editingId === info.id ? (
         <div className="card-edit">
-          {/* Editační formulář */}
           <input
             value={editedData.name}
             onChange={(e) =>
@@ -86,7 +78,6 @@ export const AdCard = ({
           </div>
         </div>
       ) : (
-        // Pokud nejsme v režimu úprav, vykreslí se inzerát jako text
         <div className="card-info">
           <p>{info.date}</p>
           <p>
@@ -94,66 +85,11 @@ export const AdCard = ({
           </p>
           <p>{info.activity}</p>
           <p>{info.message}</p>
-          {/*
-          {user && user.uid !== info.uid && (
-            <>
-              <span
-                className="reply-icon"
-                onClick={(e) => {
-                  e.stopPropagation(); // zabrání kliknutí na celou kartu
-                  handleClick(info);
-                }}
-                title="Odpovědět"
-              >
-                💬 {/* nebo použij nějakou svg/ikonu z knihovny */}
-          {/* </span>
-              {/* formulář pro odpověď*/}
-          {/* {showReplyId === info.id && (
-                <div className="reply-form">
-                  <textarea
-                    placeholder="Napiš svou odpověď..."
-                    value={replyText}
-                    onChange={(e) => setReplyText(e.target.value)}
-                  />
-                  <button
-                    onClick={() => handleReply(info)}
-                    disabled={isReplying}
-                  >
-                    {isReplying ? "Odesílání..." : "Odeslat"}{" "}
-                    {/*zabrání vícenásobnému odeslání */}
-          {/* </button>
-                </div>
-              )}
-            </>
-          )}
-
-          {/* Seznam odpovědí (jen pro autora inzerátu)*/}
-          {/* {user?.uid === info.uid && (
-            <div className="reply-list">
-              <h4>Odpovědi:</h4>
-              {replies
-                .filter((reply) => reply.adId === info.id)
-                .map((reply) => (
-                  <div key={reply.id} className="reply-item">
-                    <p>
-                      <strong>{reply.fromEmail}:</strong> {reply.message}
-                    </p>
-                  </div>
-                ))}
-            </div>
-          )} */}
-          {/* 
-          {user && user.uid !== info.uid && (
-            <button onClick={() => openReplies(info)}>Odpovědět</button>
-          )} */}
-
-          {user?.uid === info.uid && ( // Pokud přihlášený uživatel je autorem inzerátu, ukážou se tlačítka
+          {user?.uid === info.uid && (
             <div className="card-buttons">
               <Button variant="small" onClick={() => handleEdit(info)}>
                 Upravit
               </Button>
-              {/*
-              přepne do editačního režimu*/}
               <Button variant="small" onClick={() => handleDelete(info)}>
                 Smazat
               </Button>

@@ -4,36 +4,28 @@ import { AdCard } from "./AdCard";
 import "../css/lists.css";
 
 export const AdCardsWrapper = ({
-  // obálka, která zpracuje a zobrazí seznam inzerátů
-  formList, //seznam všech inzerátů
-  selectedFilter, //vybraná kategorie
-  searchQuery, // text z vyhledávacího pole
-  user, // aktuálně přihlášený uživatel
-  editingId, //id inzerátu, který se právě upravuje
-  setEditingId, //Funkce na změnu hodnoty editingId
-  editedData, //Objekt s právě editovanými daty
-  setEditedData, //Funkce na úpravu editedData
-  handleEdit, //Funkce, která připraví izerát na úpravu
-  handleSaveEdit, //funkce, která uloží upravená data
-  handleDelete, //Funkce na smazání inzerátu (z Firebase)
+  formList,
+  selectedFilter,
+  searchQuery,
+  user,
+  editingId,
+  setEditingId,
+  editedData,
+  setEditedData,
+  handleEdit,
+  handleSaveEdit,
+  handleDelete,
   setShowLoginModal,
-  // handleClick, // zobrazí formulář pro odpověď
-  // showReplyId, // ID inzerátu, ke kterému se odpovídá
-  // setShowReplyId, // nastaví výše zmíněné ID
-  // replyText, // text odpovědi
-  // setReplyText, // mění text odpovědi
-  // handleReply, // odešle odpověď
-  replies, // seznam všech odpovědí
-  openReplies, // otevře modal s odpověďmi
-  // isReplying, // stav, zda probíhá odesílání
+  replies,
+  openReplies,
   setMessage,
   setLoginMessage,
 }) => {
   const filteredList = formList.filter((item) => {
-    const matchFilter = selectedFilter //filtr kategorie
+    const matchFilter = selectedFilter
       ? item.activity === selectedFilter
       : true;
-    const matchSearch = searchQuery //hledá podle klíčového slova v kategorii a zprávě
+    const matchSearch = searchQuery
       ? item.activity?.toLowerCase().includes(searchQuery.toLowerCase()) ||
         item.message?.toLowerCase().includes(searchQuery.toLowerCase())
       : true;
@@ -42,10 +34,9 @@ export const AdCardsWrapper = ({
 
   return (
     <>
-      {filteredList.length === 0 ? ( //Pokud nenajde žádný inzerát, vypíše se hláška
+      {filteredList.length === 0 ? (
         <p className="notice">Žádné výsledky.</p>
       ) : (
-        //Pokud nějaké inzeráty existují, zobrazí se seznam (ul) a každý z nich jako AdCard.
         <div className="cards">
           {filteredList.map((info) => (
             <AdCard
@@ -59,18 +50,11 @@ export const AdCardsWrapper = ({
               handleEdit={handleEdit}
               handleSaveEdit={handleSaveEdit}
               handleDelete={handleDelete}
-              // handleClick={handleClick}
-              // showReplyId={showReplyId}
-              // setShowReplyId={setShowReplyId}
-              // replyText={replyText}
-              // setReplyText={setReplyText}
-              // handleReply={handleReply}
               setShowLoginModal={setShowLoginModal}
               replies={replies}
               openReplies={openReplies}
               setMessage={setMessage}
               setLoginMessage={setLoginMessage}
-              // isReplying={isReplying}
             />
           ))}
         </div>

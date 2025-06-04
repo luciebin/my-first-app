@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
+
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
+
 import { Button } from "./Button";
 
 import "../css/logSignForm.css";
@@ -9,17 +11,14 @@ export const LoginForm = ({ setShowLoginModal }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
-  const emailRef = useRef(); // odkazuje na input a umožní mu např. focus.
+  const emailRef = useRef();
 
   useEffect(() => {
-    //Po načtení komponenty se automaticky nastaví kurzor do emailového pole
     emailRef.current?.focus();
   }, []);
 
   const handleLogin = async () => {
-    //Funkce pro přihlášení
     if (!email || !password) {
-      // zabrání pokusu o přihlášení s prázdnými poli
       alert("Vyplň prosím email a heslo.");
       return;
     }
@@ -28,8 +27,7 @@ export const LoginForm = ({ setShowLoginModal }) => {
       setMessage("Přihlášení proběhlo úspěšně!");
       setTimeout(() => {
         if (setShowLoginModal) setShowLoginModal(false);
-      }, 2000); // 🔧 zavře modal
-      // navigate("/addform"); // 🔧 přesměruje
+      }, 2000);
     } catch (error) {
       let msg = "Chyba při přihlášení.";
       switch (error.code) {
@@ -76,15 +74,9 @@ export const LoginForm = ({ setShowLoginModal }) => {
         ></input>
       </div>
 
-      {/* {message && <p className="message">{message}</p>} */}
-
       <Button type="submit" onClick={handleLogin}>
         Přihlásit
       </Button>
-
-      {/* <button type="submit" onClick={(e) => signOut(auth)}>
-        Odhlásit se
-      </button> */}
     </div>
   );
 };

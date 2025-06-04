@@ -1,6 +1,8 @@
 import React from "react";
-import "../css/replyModal.css";
+
 import { Button } from "./Button";
+
+import "../css/replyModal.css";
 
 export const ReplyModal = ({
   replies,

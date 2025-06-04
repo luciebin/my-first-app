@@ -4,7 +4,7 @@ import { Button } from "./Button";
 import "../css/home.css";
 
 export const Home = () => {
-  const navigate = useNavigate(); // funkce pro přesměrování uživatele
+  const navigate = useNavigate();
 
   return (
     <>

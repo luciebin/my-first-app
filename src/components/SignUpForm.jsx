@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
+
 import { Button } from "./Button";
 
 import "../css/logSignForm.css";
@@ -12,7 +14,6 @@ export const SignUpForm = () => {
   const [message, setMessage] = useState("");
 
   const handleSignUp = async () => {
-    //Funkce, která se spustí po kliknutí na tlačítko „Zaregistrovat se“
     if (!email || !password) {
       alert("Vyplň e-mail i heslo.");
       return;
@@ -23,9 +24,8 @@ export const SignUpForm = () => {
     }
 
     try {
-      // slouží k ošetření chyb
       setLoading(true);
-      await createUserWithEmailAndPassword(auth, email, password); //Používá Firebase funkci pro vytvoření účtu
+      await createUserWithEmailAndPassword(auth, email, password);
       setMessage("Registrace proběhla úspěšně!");
     } catch (error) {
       let msg = "Chyba při registraci.";

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
+
 import { LoginForm } from "./LoginForm";
 import { SignUpForm } from "./SignUpForm";
-
-import "../css/loginModal.css";
 import { Button } from "./Button";
 
+import "../css/loginModal.css";
+
 export const LoginModal = ({ setShowLoginModal, message }) => {
-  //komponenta, která přijímá prop setShowLoginModal, díky které můžu zavřít modal
-  const [isLogin, setIsLogin] = useState(true); //určuje, jestli se zobrazuje přihlašovací (true) nebo registrační (false) formulář
+  const [isLogin, setIsLogin] = useState(true);
 
   useEffect(() => {
     const handleKeyDown = (e) => {

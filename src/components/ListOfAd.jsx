@@ -19,29 +19,28 @@ import { FilterBar } from "./FilterBar";
 import { LoginModal } from "./LoginModal";
 import { AdCardsWrapper } from "./AdCardsWrapper";
 import { ReplyModal } from "./ReplyModal";
-
-import "../css/lists.css";
 import { Button } from "./Button";
 
+import "../css/lists.css";
+
 export const ListOfAd = () => {
-  const navigate = useNavigate(); //přesměrování
-  const [user, setUser] = useState(null); // přihlášený uživatel
-  const [formList, setFormList] = useState([]); // pole všech inzerátů
-  const [showLoginModal, setShowLoginModal] = useState(false); // jestli se má ukázat modal
-  const [editingId, setEditingId] = useState(null); // id inzerátu, který se upravuje
-  const [selectedFilter, setSelectedFilter] = useState(""); // vybraný filtr kategorie
-  const [searchQuery, setSearchQuery] = useState(""); // vstup uživatele pro hledání
-  const [message, setMessage] = useState(""); // upozornění na akci(smazání, odpověd, edit)
-  const [loginMessage, setLoginMessage] = useState(""); //zpráva v modalu
-  const [debouncedSearch, setDebouncedSearch] = useState(""); // zpožděný search (kvůli výkonu)
+  const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+  const [formList, setFormList] = useState([]);
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [editingId, setEditingId] = useState(null);
+  const [selectedFilter, setSelectedFilter] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [message, setMessage] = useState("");
+  const [loginMessage, setLoginMessage] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
   const [replyText, setReplyText] = useState("");
   const [replies, setReplies] = useState([]);
   const [isReplying, setIsReplying] = useState(false);
   const [showReplyModal, setShowReplyModal] = useState(false);
-  const [currentReplies, setCurrentReplies] = useState([]); // Sem se načtou odpovědi
-  const [selectedAd, setSelectedAd] = useState(null); //výběr inzerátu na odpověď
+  const [currentReplies, setCurrentReplies] = useState([]);
+  const [selectedAd, setSelectedAd] = useState(null);
   const [editedData, setEditedData] = useState({
-    // data editovaného inzerátu
     name: "",
     age: "",
     date: "",
@@ -50,22 +49,20 @@ export const ListOfAd = () => {
   });
 
   const handleReply = async (info) => {
-    // odpověď na inzerát
     if (!replyText.trim() || isReplying) return;
 
     setIsReplying(true);
     try {
-      //vložíš odpověď do kolekce replies ve Firestore. Včetně ID inzerátu a uživatele.
       await addDoc(collection(db, "replies"), {
-        adId: info.id, // ke kterému inzerátu odpověď patří
-        toUserId: info.uid, // komu je odpověď určena
+        adId: info.id,
+        toUserId: info.uid,
         fromUserId: user.uid,
         fromEmail: user.email,
         message: replyText.trim(),
         createdAt: serverTimestamp(),
       });
 
-      setReplyText(""); //vymaže stav odpovědi
+      setReplyText("");
       setMessage("Odpověď byla odeslána.");
     } catch (error) {
       console.error("Chyba při odesílání odpovědi:", error);
@@ -75,19 +72,16 @@ export const ListOfAd = () => {
     }
   };
 
-  // upozornění na zprávu
   const myReplies = replies.filter((reply) => reply.toUserId === user?.uid);
 
   const openReplies = (adInfo) => {
     setSelectedAd(adInfo);
-    // pokud přihlášený uživatel NENÍ autor, otevře se modal s TEXTAREA
     if (user?.uid !== adInfo.uid) {
-      setCurrentReplies([]); // nezobrazuj žádné odpovědi
+      setCurrentReplies([]);
       setShowReplyModal(true);
       return;
     }
 
-    // pokud je to autor, zobrazí odpovědi
     const relevantReplies = replies.filter((reply) => reply.adId === adInfo.id);
     setCurrentReplies(
       relevantReplies.map((reply) => ({
@@ -98,20 +92,9 @@ export const ListOfAd = () => {
     setShowReplyModal(true);
   };
 
-  // const handleClick = (info) => {
-  //   //kliknutí na inzerát pro odpověď
-  //   if (!user) {
-  //     setShowLoginModal(true); //Pokud není přihlášeno → zobrazíš login modal
-  //     return;
-  //   }
-  //   setShowReplyId(info.id); //Jinak nastavíš, na který inzerát se odpovídá
-  // };
-
   const handleEdit = (item) => {
-    //připraví inzerát pro úpravu
     setEditingId(item.id);
     setEditedData({
-      // načte data inzerátu do editačního formuláře
       name: item.name,
       age: item.age,
       date: item.date,
@@ -121,17 +104,14 @@ export const ListOfAd = () => {
   };
 
   const handleSaveEdit = async (id) => {
-    //uloží změny
     const currentItem = formList.find((i) => i.id === id);
     if (!currentItem) return;
 
     if (user?.uid !== currentItem?.uid) {
-      // kontroluje, jestli je uživatel vlastník
       alert("Nemáš oprávnění.");
       return;
     }
     if (
-      // validuje data (nesmí být prázdné)
       !editedData.name.trim() ||
       !editedData.age.trim() ||
       !editedData.date.trim() ||
@@ -143,7 +123,6 @@ export const ListOfAd = () => {
     }
 
     try {
-      //po uložení aktualizuje seznam inzerátů
       const docRef = doc(db, "formList", id);
       await updateDoc(docRef, editedData);
 
@@ -158,21 +137,18 @@ export const ListOfAd = () => {
     }
   };
 
-  // smaže inzerát
   const handleDelete = async (item) => {
     if (user?.uid !== item.uid) {
-      //kontroluje vlastnictví
       alert("Nemáš oprávnění.");
       return;
     }
 
-    const confirm = window.confirm("Opravdu chceš smazat tento inzerát?"); //potvrzení od uživatele
+    const confirm = window.confirm("Opravdu chceš smazat tento inzerát?");
     if (!confirm) return;
 
     try {
-      //smaže z databáze
       await deleteDoc(doc(db, "formList", item.id));
-      setFormList((prev) => prev.filter((i) => i.id !== item.id)); // aktualizuje seznam
+      setFormList((prev) => prev.filter((i) => i.id !== item.id));
       setMessage("Inzerát byl smazán.");
     } catch (error) {
       console.error("Chyba při mazání:", error);
@@ -180,7 +156,6 @@ export const ListOfAd = () => {
     }
   };
 
-  // Načtení dat z Firestore
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -193,29 +168,25 @@ export const ListOfAd = () => {
           id: doc.id,
           ...doc.data(),
         }));
-        setFormList(data); // uloží do state
+        setFormList(data);
       } catch (error) {
         console.error("Chyba při načítání z Firestore:", error);
       }
     };
-
     fetchData();
   }, []);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser); // Uložíme přihlášeného uživatele (nebo null)
+      setUser(currentUser);
     });
-
-    return unsubscribe; // Odhlášení uživatele při unmountu
+    return unsubscribe;
   }, []);
 
   useEffect(() => {
-    // Debounce vyhledávání
     const delay = setTimeout(() => {
       setDebouncedSearch(searchQuery);
-    }, 500); // čeká 0,5 sekundy
-
+    }, 500);
     return () => clearTimeout(delay);
   }, [searchQuery]);
 
@@ -227,7 +198,6 @@ export const ListOfAd = () => {
   }, [message, showLoginModal]);
 
   useEffect(() => {
-    //odpovědi na inzerát
     const fetchReplies = async () => {
       try {
         const snapshot = await getDocs(collection(db, "replies"));
@@ -240,7 +210,6 @@ export const ListOfAd = () => {
         console.error("Chyba při načítání odpovědí:", err);
       }
     };
-
     fetchReplies();
   }, []);
 
@@ -250,7 +219,6 @@ export const ListOfAd = () => {
 
   return (
     <>
-      {/* {showLoginModal && <LoginModal setShowLoginModal={setShowLoginModal} />} */}
       {showLoginModal && (
         <LoginModal
           setShowLoginModal={setShowLoginModal}
@@ -274,6 +242,7 @@ export const ListOfAd = () => {
                         const userReplies = replies.filter(
                           (reply) => reply.toUserId === user.uid
                         );
+                        setSelectedAd({ uid: user.uid });
                         setCurrentReplies(userReplies);
                         setShowReplyModal(true);
                       }}
@@ -290,9 +259,6 @@ export const ListOfAd = () => {
                 <Button onClick={() => setShowLoginModal(true)}>
                   Přihlásit se
                 </Button>
-                {/* {showLoginModal && (
-                  <LoginModal setShowLoginModal={setShowLoginModal} />
-                )} */}
               </>
             )}
 
@@ -336,15 +302,8 @@ export const ListOfAd = () => {
           handleSaveEdit={handleSaveEdit}
           handleDelete={handleDelete}
           setShowLoginModal={setShowLoginModal}
-          // handleClick={handleClick}
-          // showReplyId={showReplyId}
-          // setShowReplyId={setShowReplyId}
-          // replyText={replyText}
-          // setReplyText={setReplyText}
-          // handleReply={handleReply}
           replies={replies}
           openReplies={openReplies}
-          // isReplying={isReplying}
           setMessage={setMessage}
           setLoginMessage={setLoginMessage}
         />
@@ -359,7 +318,6 @@ export const ListOfAd = () => {
             handleReply={handleReply}
             isReplying={isReplying}
             onClose={() => setShowReplyModal(false)}
-            // message={message}
           />
         )}
       </div>

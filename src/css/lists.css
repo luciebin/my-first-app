@@ -20,7 +20,7 @@ body {
   width: 100%;
   max-width: 100%;
   background-color: var(--color-bg-navbar);
-  box-shadow: inset 5px 5px 30px rgb(0 0 0 / 0.2); /* 0 2px 6px rgba(0, 0, 0, 0.1);*/
+  box-shadow: inset 5px 5px 30px rgb(0 0 0 / 0.2);
   font-family: var(--font-buttons);
   z-index: 10;
   box-sizing: border-box;
@@ -141,7 +141,7 @@ body {
   text-align: center;
 }
 
-/* tablety */
+/* tablet */
 @media (min-width: 768px) {
   .cards {
     column-count: 3;
