@@ -26,7 +26,9 @@ export const LoginForm = ({ setShowLoginModal }) => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       setMessage("Přihlášení proběhlo úspěšně!");
-      if (setShowLoginModal) setShowLoginModal(false); // 🔧 zavře modal
+      setTimeout(() => {
+        if (setShowLoginModal) setShowLoginModal(false);
+      }, 2000); // 🔧 zavře modal
       // navigate("/addform"); // 🔧 přesměruje
     } catch (error) {
       let msg = "Chyba při přihlášení.";
@@ -52,6 +54,8 @@ export const LoginForm = ({ setShowLoginModal }) => {
 
   return (
     <div className="login-form">
+      {message && <p className="notice-message">{message}</p>}
+
       <div className="login-email">
         <label htmlFor="email">Email</label>
         <input
