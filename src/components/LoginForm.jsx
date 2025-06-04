@@ -72,7 +72,7 @@ export const LoginForm = ({ setShowLoginModal }) => {
         ></input>
       </div>
 
-      {message && <p className="message">{message}</p>}
+      {/* {message && <p className="message">{message}</p>} */}
 
       <Button type="submit" onClick={handleLogin}>
         Přihlásit

@@ -18,7 +18,9 @@
   width: 100%;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   position: relative;
-  height: 280px;
+  height: 300px;
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
 .show-reply-form {
@@ -32,6 +34,9 @@
 
 .replies {
   list-style: none;
+  max-height: 300px;
+
+  padding-right: 8px;
 }
 
 .reply-form {

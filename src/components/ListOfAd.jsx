@@ -31,7 +31,8 @@ export const ListOfAd = () => {
   const [editingId, setEditingId] = useState(null); // id inzerátu, který se upravuje
   const [selectedFilter, setSelectedFilter] = useState(""); // vybraný filtr kategorie
   const [searchQuery, setSearchQuery] = useState(""); // vstup uživatele pro hledání
-  const [message, setMessage] = useState(""); // systémová hláška
+  const [message, setMessage] = useState(""); // upozornění na akci(smazání, odpověd, edit)
+  const [loginMessage, setLoginMessage] = useState(""); //zpráva v modalu
   const [debouncedSearch, setDebouncedSearch] = useState(""); // zpožděný search (kvůli výkonu)
   const [replyText, setReplyText] = useState("");
   const [replies, setReplies] = useState([]);
@@ -243,12 +244,20 @@ export const ListOfAd = () => {
     fetchReplies();
   }, []);
 
+  useEffect(() => {
+    if (!showLoginModal) setLoginMessage("");
+  }, [showLoginModal]);
+
   return (
     <>
-      {showLoginModal && <LoginModal setShowLoginModal={setShowLoginModal} />}
+      {/* {showLoginModal && <LoginModal setShowLoginModal={setShowLoginModal} />} */}
       {showLoginModal && (
-        <LoginModal setShowLoginModal={setShowLoginModal} message={message} />
+        <LoginModal
+          setShowLoginModal={setShowLoginModal}
+          message={loginMessage}
+        />
       )}
+      {message && <p className="notice-message">{message}</p>}
 
       <div className={`lists ${showLoginModal ? "blur" : ""}`}>
         <header className="nav-bar">
@@ -292,7 +301,9 @@ export const ListOfAd = () => {
               onClick={() => {
                 if (!user) {
                   setShowLoginModal(true);
-                  setMessage("Pro přidání inzerátu se musíš přihlásit.");
+                  setLoginMessage(
+                    "Pro přidání inzerátu se musíš přihlásit nebo zaergistrovat."
+                  );
                   return;
                 }
                 navigate("/addform");
@@ -335,6 +346,7 @@ export const ListOfAd = () => {
           openReplies={openReplies}
           // isReplying={isReplying}
           setMessage={setMessage}
+          setLoginMessage={setLoginMessage}
         />
 
         {showReplyModal && (

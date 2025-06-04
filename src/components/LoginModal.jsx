@@ -20,7 +20,7 @@ export const LoginModal = ({ setShowLoginModal, message }) => {
   return (
     <div className="modal">
       <div className="modal-content">
-        {message && <p className="notice-message">{message}</p>}
+        {message && <p className="modal-message">{message}</p>}
 
         {isLogin ? (
           <>

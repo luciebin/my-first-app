@@ -27,6 +27,7 @@ export const AdCardsWrapper = ({
   openReplies, // otevře modal s odpověďmi
   // isReplying, // stav, zda probíhá odesílání
   setMessage,
+  setLoginMessage,
 }) => {
   const filteredList = formList.filter((item) => {
     const matchFilter = selectedFilter //filtr kategorie
@@ -68,6 +69,7 @@ export const AdCardsWrapper = ({
               replies={replies}
               openReplies={openReplies}
               setMessage={setMessage}
+              setLoginMessage={setLoginMessage}
               // isReplying={isReplying}
             />
           ))}

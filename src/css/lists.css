@@ -123,6 +123,22 @@ body {
   text-align: center;
   font-size: 0.95rem;
   margin-top: 0.5rem;
+  position: fixed;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-green-light);
+  padding: 8px 16px;
+  border-radius: 8px;
+  z-index: 9999;
+}
+
+.modal-message {
+  color: var(--color-text);
+  font-family: var(--font-primary);
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  text-align: center;
 }
 
 /* tablety */

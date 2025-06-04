@@ -19,7 +19,7 @@ export const AdCard = ({
   // setReplyText,
   // handleReply,
   openReplies,
-  setMessage,
+  setLoginMessage,
   // isReplying,
 }) => {
   return (
@@ -28,7 +28,7 @@ export const AdCard = ({
       onClick={() => {
         if (typeof setShowLoginModal === "function" && !user) {
           setShowLoginModal(true);
-          setMessage("Pro odpověď se musíš přihlásit nebo zaregistrovat.");
+          setLoginMessage("Pro odpověď se musíš přihlásit nebo zaregistrovat.");
           return;
         }
         if (user && user.uid !== info.uid) {
